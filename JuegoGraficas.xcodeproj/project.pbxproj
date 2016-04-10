@@ -1,0 +1,353 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2BC042FA1CBA115100280B20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BC042F91CBA115100280B20 /* main.cpp */; };
+		2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043001CBA116A00280B20 /* GLUT.framework */; };
+		2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043011CBA116A00280B20 /* OpenGL.framework */; };
+		2BC043061CBA12DB00280B20 /* ImageLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BC043041CBA12DB00280B20 /* ImageLoader.cpp */; };
+		2BD93F391CBABEB2004CB4D8 /* glm_util.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F2F1CBABEB2004CB4D8 /* glm_util.c */; };
+		2BD93F3A1CBABEB2004CB4D8 /* glm.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F301CBABEB2004CB4D8 /* glm.c */; };
+		2BD93F3B1CBABEB2004CB4D8 /* glmimg_devil.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F321CBABEB2004CB4D8 /* glmimg_devil.c */; };
+		2BD93F3C1CBABEB2004CB4D8 /* glmimg_jpg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F331CBABEB2004CB4D8 /* glmimg_jpg.c */; };
+		2BD93F3D1CBABEB2004CB4D8 /* glmimg_png.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F341CBABEB2004CB4D8 /* glmimg_png.c */; };
+		2BD93F3E1CBABEB2004CB4D8 /* glmimg_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F351CBABEB2004CB4D8 /* glmimg_sdl.c */; };
+		2BD93F3F1CBABEB2004CB4D8 /* glmimg_sim.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F361CBABEB2004CB4D8 /* glmimg_sim.c */; };
+		2BD93F401CBABEB2004CB4D8 /* glmimg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F371CBABEB2004CB4D8 /* glmimg.c */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		2BC042F41CBA115100280B20 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2B34E7F11CBAB77100673258 /* pasto.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pasto.bmp; sourceTree = "<group>"; };
+		2BC042F61CBA115100280B20 /* JuegoGraficas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JuegoGraficas; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BC042F91CBA115100280B20 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		2BC043001CBA116A00280B20 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		2BC043011CBA116A00280B20 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		2BC043041CBA12DB00280B20 /* ImageLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageLoader.cpp; sourceTree = "<group>"; };
+		2BC043051CBA12DB00280B20 /* ImageLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		2BC043091CBA1AA700280B20 /* ARGO_fabrics_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_fabrics_01.jpg; sourceTree = "<group>"; };
+		2BC0430A1CBA1AA700280B20 /* ARGO_fabrics_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_fabrics_02.jpg; sourceTree = "<group>"; };
+		2BC0430B1CBA1AA700280B20 /* ARGO_fold01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_fold01.jpg; sourceTree = "<group>"; };
+		2BC0430C1CBA1AA700280B20 /* ARGO_fold02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_fold02.jpg; sourceTree = "<group>"; };
+		2BC0430D1CBA1AA700280B20 /* ARGO_kohtenstoff01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ARGO_kohtenstoff01.png; sourceTree = "<group>"; };
+		2BC0430E1CBA1AA700280B20 /* ARGO_leather01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_leather01.jpg; sourceTree = "<group>"; };
+		2BC0430F1CBA1AA700280B20 /* ARGO_M__hair.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_M__hair.jpg; sourceTree = "<group>"; };
+		2BC043101CBA1AA700280B20 /* ARGO_M_eye_hair.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_M_eye_hair.jpg; sourceTree = "<group>"; };
+		2BC043111CBA1AA700280B20 /* ARGO_M_skin.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_M_skin.jpg; sourceTree = "<group>"; };
+		2BC043121CBA1AA700280B20 /* ARGO_metal.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_metal.jpg; sourceTree = "<group>"; };
+		2BC043131CBA1AA700280B20 /* ARGO_shoe01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_shoe01.jpg; sourceTree = "<group>"; };
+		2BC043141CBA1AA700280B20 /* ARGO_shoe_02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ARGO_shoe_02.jpg; sourceTree = "<group>"; };
+		2BC043151CBA1AA700280B20 /* boy.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = boy.mtl; sourceTree = "<group>"; };
+		2BC043161CBA1AA700280B20 /* boy.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = boy.obj; sourceTree = "<group>"; };
+		2BC043181CBA1ABC00280B20 /* diffuse.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = diffuse.bmp; sourceTree = "<group>"; };
+		2BD93F2F1CBABEB2004CB4D8 /* glm_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glm_util.c; sourceTree = "<group>"; };
+		2BD93F301CBABEB2004CB4D8 /* glm.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glm.c; sourceTree = "<group>"; };
+		2BD93F311CBABEB2004CB4D8 /* glm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glm.h; sourceTree = "<group>"; };
+		2BD93F321CBABEB2004CB4D8 /* glmimg_devil.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_devil.c; sourceTree = "<group>"; };
+		2BD93F331CBABEB2004CB4D8 /* glmimg_jpg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_jpg.c; sourceTree = "<group>"; };
+		2BD93F341CBABEB2004CB4D8 /* glmimg_png.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_png.c; sourceTree = "<group>"; };
+		2BD93F351CBABEB2004CB4D8 /* glmimg_sdl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_sdl.c; sourceTree = "<group>"; };
+		2BD93F361CBABEB2004CB4D8 /* glmimg_sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_sim.c; sourceTree = "<group>"; };
+		2BD93F371CBABEB2004CB4D8 /* glmimg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg.c; sourceTree = "<group>"; };
+		2BD93F381CBABEB2004CB4D8 /* glmint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glmint.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2BC042F31CBA115100280B20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */,
+				2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2BC042ED1CBA115100280B20 = {
+			isa = PBXGroup;
+			children = (
+				2BC043001CBA116A00280B20 /* GLUT.framework */,
+				2BC043011CBA116A00280B20 /* OpenGL.framework */,
+				2BC042F81CBA115100280B20 /* JuegoGraficas */,
+				2BC042F71CBA115100280B20 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2BC042F71CBA115100280B20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2BC042F61CBA115100280B20 /* JuegoGraficas */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2BC042F81CBA115100280B20 /* JuegoGraficas */ = {
+			isa = PBXGroup;
+			children = (
+				2BC043171CBA1ABC00280B20 /* Texturas */,
+				2BC043041CBA12DB00280B20 /* ImageLoader.cpp */,
+				2BC043051CBA12DB00280B20 /* ImageLoader.h */,
+				2BD93F2F1CBABEB2004CB4D8 /* glm_util.c */,
+				2BD93F301CBABEB2004CB4D8 /* glm.c */,
+				2BD93F311CBABEB2004CB4D8 /* glm.h */,
+				2BD93F321CBABEB2004CB4D8 /* glmimg_devil.c */,
+				2BD93F331CBABEB2004CB4D8 /* glmimg_jpg.c */,
+				2BD93F341CBABEB2004CB4D8 /* glmimg_png.c */,
+				2BD93F351CBABEB2004CB4D8 /* glmimg_sdl.c */,
+				2BD93F361CBABEB2004CB4D8 /* glmimg_sim.c */,
+				2BD93F371CBABEB2004CB4D8 /* glmimg.c */,
+				2BD93F381CBABEB2004CB4D8 /* glmint.h */,
+				2BC042F91CBA115100280B20 /* main.cpp */,
+				2BC043071CBA1AA700280B20 /* Objetos */,
+			);
+			path = JuegoGraficas;
+			sourceTree = "<group>";
+		};
+		2BC043071CBA1AA700280B20 /* Objetos */ = {
+			isa = PBXGroup;
+			children = (
+				2BC043081CBA1AA700280B20 /* boy */,
+				2BC043151CBA1AA700280B20 /* boy.mtl */,
+				2BC043161CBA1AA700280B20 /* boy.obj */,
+			);
+			path = Objetos;
+			sourceTree = "<group>";
+		};
+		2BC043081CBA1AA700280B20 /* boy */ = {
+			isa = PBXGroup;
+			children = (
+				2BC043091CBA1AA700280B20 /* ARGO_fabrics_01.jpg */,
+				2BC0430A1CBA1AA700280B20 /* ARGO_fabrics_02.jpg */,
+				2BC0430B1CBA1AA700280B20 /* ARGO_fold01.jpg */,
+				2BC0430C1CBA1AA700280B20 /* ARGO_fold02.jpg */,
+				2BC0430D1CBA1AA700280B20 /* ARGO_kohtenstoff01.png */,
+				2BC0430E1CBA1AA700280B20 /* ARGO_leather01.jpg */,
+				2BC0430F1CBA1AA700280B20 /* ARGO_M__hair.jpg */,
+				2BC043101CBA1AA700280B20 /* ARGO_M_eye_hair.jpg */,
+				2BC043111CBA1AA700280B20 /* ARGO_M_skin.jpg */,
+				2BC043121CBA1AA700280B20 /* ARGO_metal.jpg */,
+				2BC043131CBA1AA700280B20 /* ARGO_shoe01.jpg */,
+				2BC043141CBA1AA700280B20 /* ARGO_shoe_02.jpg */,
+			);
+			path = boy;
+			sourceTree = "<group>";
+		};
+		2BC043171CBA1ABC00280B20 /* Texturas */ = {
+			isa = PBXGroup;
+			children = (
+				2B34E7F11CBAB77100673258 /* pasto.bmp */,
+				2BC043181CBA1ABC00280B20 /* diffuse.bmp */,
+			);
+			path = Texturas;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2BC042F51CBA115100280B20 /* JuegoGraficas */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2BC042FD1CBA115100280B20 /* Build configuration list for PBXNativeTarget "JuegoGraficas" */;
+			buildPhases = (
+				2BC042F21CBA115100280B20 /* Sources */,
+				2BC042F31CBA115100280B20 /* Frameworks */,
+				2BC042F41CBA115100280B20 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JuegoGraficas;
+			productName = JuegoGraficas;
+			productReference = 2BC042F61CBA115100280B20 /* JuegoGraficas */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2BC042EE1CBA115100280B20 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Diego Aleman";
+				TargetAttributes = {
+					2BC042F51CBA115100280B20 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 2BC042F11CBA115100280B20 /* Build configuration list for PBXProject "JuegoGraficas" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2BC042ED1CBA115100280B20;
+			productRefGroup = 2BC042F71CBA115100280B20 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2BC042F51CBA115100280B20 /* JuegoGraficas */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2BC042F21CBA115100280B20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BC043061CBA12DB00280B20 /* ImageLoader.cpp in Sources */,
+				2BC042FA1CBA115100280B20 /* main.cpp in Sources */,
+				2BD93F3A1CBABEB2004CB4D8 /* glm.c in Sources */,
+				2BD93F3F1CBABEB2004CB4D8 /* glmimg_sim.c in Sources */,
+				2BD93F391CBABEB2004CB4D8 /* glm_util.c in Sources */,
+				2BD93F3E1CBABEB2004CB4D8 /* glmimg_sdl.c in Sources */,
+				2BD93F3C1CBABEB2004CB4D8 /* glmimg_jpg.c in Sources */,
+				2BD93F3D1CBABEB2004CB4D8 /* glmimg_png.c in Sources */,
+				2BD93F401CBABEB2004CB4D8 /* glmimg.c in Sources */,
+				2BD93F3B1CBABEB2004CB4D8 /* glmimg_devil.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2BC042FB1CBA115100280B20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		2BC042FC1CBA115100280B20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		2BC042FE1CBA115100280B20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		2BC042FF1CBA115100280B20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2BC042F11CBA115100280B20 /* Build configuration list for PBXProject "JuegoGraficas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BC042FB1CBA115100280B20 /* Debug */,
+				2BC042FC1CBA115100280B20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2BC042FD1CBA115100280B20 /* Build configuration list for PBXNativeTarget "JuegoGraficas" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2BC042FE1CBA115100280B20 /* Debug */,
+				2BC042FF1CBA115100280B20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2BC042EE1CBA115100280B20 /* Project object */;
+}
