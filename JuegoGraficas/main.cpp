@@ -36,10 +36,17 @@ string fullPath = __FILE__;
 
 #define MODEL_COUNT 10
 #define PLAYER_MOD 0
+#define PILL_ONE 1
+#define PILL_TWO 2
+#define PILL_THREE 3
+#define LEAF 4
+#define NEEDLE 5
+#define MEDS 6
+#define TREE 7
 
 GLMmodel models[MODEL_COUNT];
 
-const int TEXTURE_COUNT=7;
+const int TEXTURE_COUNT=8;
 static GLuint texName[TEXTURE_COUNT];
 
 void getParentPath(){
@@ -95,7 +102,7 @@ void initRendering(){
 void timer(int i) {
     
     glutPostRedisplay();
-    glutTimerFunc(100, timer, 1);
+    glutTimerFunc(10, timer, 1);
 }
 
 
@@ -116,6 +123,121 @@ void dibujaJugador()
     
     
  
+}
+
+void dibujaPildoraRoja()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(5, 5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[PILL_ONE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+void dibujaPildoraAmarilla()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(-5, 5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[PILL_TWO], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+void dibujaPildoraBlanca()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(-5, -5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[PILL_THREE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+void dibujaArbol()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(-8, -8, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(2.5, 2.5, 2.5);
+    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(8, -8, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(2.5, 2.5, 2.5);
+    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(8, 8, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(2.5, 2.5, 2.5);
+    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslated(-8, 8, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(2.5, 2.5, 2.5);
+    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+void dibujaHoja()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(5, -5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glPushMatrix();
+    glRotated(90, 0, 0, 1);
+    glmDraw(&models[LEAF], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+    glPopMatrix();
+}
+
+void dibujaMeds()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(0, -5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[MEDS], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+void dibujaJeringa()
+{
+    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(0, 5, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(1.5, 1.5, 1.5);
+    glmDraw(&models[NEEDLE], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
 }
 
 void dibujaEscenario(){
@@ -158,6 +280,15 @@ void display(){
     
     glPushMatrix();
     dibujaEscenario();
+    
+    dibujaPildoraRoja();
+    dibujaPildoraAmarilla();
+    dibujaPildoraBlanca();
+    dibujaArbol();
+    dibujaHoja();
+    dibujaMeds();
+    dibujaJeringa();
+    
     dibujaJugador();
     glPopMatrix();
     
@@ -190,6 +321,55 @@ void init(){
     models[PLAYER_MOD] = *glmReadOBJ(ruta.c_str());
     glmUnitize(&models[PLAYER_MOD]);
     glmVertexNormals(&models[PLAYER_MOD], 90.0, GL_TRUE);
+    
+    //pildora roja
+    ruta = fullPath + "Objetos/pill.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[PILL_ONE] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[PILL_ONE]);
+    glmVertexNormals(&models[PILL_ONE], 90.0, GL_TRUE);
+    
+    //pildora amarilla
+    ruta = fullPath + "Objetos/pill2.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[PILL_TWO] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[PILL_TWO]);
+    glmVertexNormals(&models[PILL_TWO], 90.0, GL_TRUE);
+    
+    //pildora blanca
+    ruta = fullPath + "Objetos/pill3.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[PILL_THREE] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[PILL_THREE]);
+    glmVertexNormals(&models[PILL_THREE], 90.0, GL_TRUE);
+    
+    //arbol
+    ruta = fullPath + "Objetos/alstonia.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[TREE] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[TREE]);
+    glmVertexNormals(&models[TREE], 90.0, GL_TRUE);
+    
+    //hoja
+    ruta = fullPath + "Objetos/leaf.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[LEAF] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[LEAF]);
+    glmVertexNormals(&models[LEAF], 90.0, GL_TRUE);
+    
+    //meds
+    ruta = fullPath + "Objetos/med+bottle.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[MEDS] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[MEDS]);
+    glmVertexNormals(&models[MEDS], 90.0, GL_TRUE);
+    
+    //jeringa
+    ruta = fullPath + "Objetos/needle.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[NEEDLE] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[NEEDLE]);
+    glmVertexNormals(&models[NEEDLE], 90.0, GL_TRUE);
     
     
 }
@@ -224,7 +404,7 @@ void mousePasivo(int x, int y){
     mouseX = x;
     mouseY = y;
     rotado = (mouseX - posX) / (mouseY-posY);
-    cout << mouseX-mouseY << endl;
+    cout << rotado << endl;
 }
 
 void mouseActivo(int button, int state, int x, int y){
@@ -246,7 +426,7 @@ int main(int argc, char *argv[]) {
     glutKeyboardFunc(myKeyboard);
     glutPassiveMotionFunc(mousePasivo);
     glutMouseFunc(mouseActivo);
-    glutTimerFunc(100, timer, 1);
+    glutTimerFunc(10, timer, 1);
     glutMainLoop();
     return EXIT_SUCCESS;
 }
