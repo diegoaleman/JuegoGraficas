@@ -32,6 +32,10 @@ double posX = 0, posY = 0;
 double rotado = 0;
 double mouseX, mouseY;
 
+float delta=0.1;
+float t=-1.0;
+int sumaTotal = 0;
+
 string fullPath = __FILE__;
 
 #define MODEL_COUNT 10
@@ -93,11 +97,76 @@ void initRendering(){
 }
 
 void timer(int i) {
+    //if ( start){
+        sumaTotal += 1;
+    //}
     
+    delta = 0.1;
+    t += delta;
     glutPostRedisplay();
-    glutTimerFunc(100, timer, 1);
+    glutTimerFunc(100,timer,1);
+
+    //glutPostRedisplay();
+    //glutTimerFunc(100, timer, 1);
 }
 
+void dibujaCronometro(){
+    GLint k;
+    
+    char mensaje [200] = "";
+    
+    int a,b,c;
+    
+    float x = sumaTotal / 10.0;
+    b = x;
+    
+    x = x - b;
+    
+    x = x * 10;
+    c=x;
+    
+    a = b /60;
+    b = b %60;
+    
+    
+    
+    if (b <= 9) {
+        sprintf(mensaje, "%d : 0%d : %d", a, b , c);
+    } else {
+        sprintf(mensaje, "%d : %d : %d", a, b , c);
+    }
+    
+    
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(-1, 9); // inicializa raster position
+    for (k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+
+}
+
+void dibujaVidas(){
+    char mensaje [200] = "";
+    sprintf(mensaje, "%s", "O O O");
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(-8, 9); // inicializa raster position
+    for (int k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+}
+
+void dibujaPuntaje(){
+    char mensaje [200] = "";
+    sprintf(mensaje, "%s", "123");
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(8, 9); // inicializa raster position
+    for (int k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+}
 
 void dibujaJugador()
 {
@@ -105,9 +174,9 @@ void dibujaJugador()
 
     
     glPushMatrix();
-    glTranslated(posX, posY, 0);
+    glTranslated(posX, posY, -1.2);
     glRotated(90, 0, 0, 0);
-    glScaled(1.5, 1.5, 1.5);
+    glScaled(1.2, 1.2, 1.2);
     glPushMatrix();
     glRotated(rotado, 0, 1, 0);
     glmDraw(&models[PLAYER_MOD], GLM_COLOR | GLM_FLAT);
@@ -159,9 +228,17 @@ void display(){
     glPushMatrix();
     dibujaEscenario();
     dibujaJugador();
+    
+    dibujaCronometro();
+    dibujaVidas();
+    dibujaPuntaje();
     glPopMatrix();
     
+
+    
     glutSwapBuffers();
+    
+
 
     
 }
@@ -174,7 +251,7 @@ void reshape(int w, int h){
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0, 0,15 , 0, 0, 0, 0, 1, 0);
+    gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
     
 }
 
