@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JuegoGraficas/main.cpp"
-            timestampString = "482021025.043065"
+            timestampString = "482043186.95716"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "406"
+            endingLineNumber = "406"
             landmarkName = "mousePasivo(int x, int y)"
             landmarkType = "7">
          </BreakpointContent>
