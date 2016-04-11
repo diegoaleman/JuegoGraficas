@@ -1,0 +1,27 @@
+#
+## Alias OBJ Material File
+# Exported from SketchUp, (c) 2000-2012 Trimble Navigation Limited
+
+newmtl med_label
+Ka 0.000000 0.000000 0.000000
+Kd 0.929412 0.905882 0.882353
+Ks 0.330000 0.330000 0.330000
+map_Kd med+bottle/med_label.png
+
+newmtl Translucent_Glass_Brown
+Ka 0.000000 0.000000 0.000000
+Kd 0.349020 0.172549 0.047059
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl Translucent_Glass_Brown1
+Ka 0.000000 0.000000 0.000000
+Kd 0.545098 0.270588 0.074510
+Ks 0.330000 0.330000 0.330000
+d 0.500000
+
+newmtl FrontColor
+Ka 0.000000 0.000000 0.000000
+Kd 1.000000 1.000000 1.000000
+Ks 0.330000 0.330000 0.330000
+

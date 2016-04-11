@@ -29,6 +29,7 @@ using namespace std;
 int screenWidth = 800,screenHeight = 800;
 double fieldWidth = 10.0, fieldHeight = 10.0;
 double posX = 0, posY = 0;
+double rotado = 0;
 double mouseX, mouseY;
 
 string fullPath = __FILE__;
@@ -91,6 +92,12 @@ void initRendering(){
     delete image;
 }
 
+void timer(int i) {
+    
+    glutPostRedisplay();
+    glutTimerFunc(100, timer, 1);
+}
+
 
 void dibujaJugador()
 {
@@ -101,7 +108,10 @@ void dibujaJugador()
     glTranslated(posX, posY, 0);
     glRotated(90, 0, 0, 0);
     glScaled(1.5, 1.5, 1.5);
+    glPushMatrix();
+    glRotated(rotado, 0, 1, 0);
     glmDraw(&models[PLAYER_MOD], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
     glPopMatrix();
     
     
@@ -213,9 +223,12 @@ void myKeyboard(unsigned char theKey, int x, int y){
 void mousePasivo(int x, int y){
     mouseX = x;
     mouseY = y;
+    rotado = (mouseX - posX) / (mouseY-posY);
+    cout << mouseX-mouseY << endl;
 }
 
 void mouseActivo(int button, int state, int x, int y){
+    
     
 }
 
@@ -233,7 +246,7 @@ int main(int argc, char *argv[]) {
     glutKeyboardFunc(myKeyboard);
     glutPassiveMotionFunc(mousePasivo);
     glutMouseFunc(mouseActivo);
-    //glutTimerFunc(100, timer, 1);
+    glutTimerFunc(100, timer, 1);
     glutMainLoop();
     return EXIT_SUCCESS;
 }

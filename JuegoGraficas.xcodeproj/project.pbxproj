@@ -66,6 +66,22 @@
 		2BD93F361CBABEB2004CB4D8 /* glmimg_sim.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg_sim.c; sourceTree = "<group>"; };
 		2BD93F371CBABEB2004CB4D8 /* glmimg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = glmimg.c; sourceTree = "<group>"; };
 		2BD93F381CBABEB2004CB4D8 /* glmint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glmint.h; sourceTree = "<group>"; };
+		F42169FE1CBB1BA100F45903 /* med_label.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = med_label.png; sourceTree = "<group>"; };
+		F42169FF1CBB1BA100F45903 /* med+bottle.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = "med+bottle.mtl"; sourceTree = "<group>"; };
+		F4216A001CBB1BA100F45903 /* med+bottle.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = "med+bottle.obj"; sourceTree = "<group>"; };
+		F4216A011CBB1DFA00F45903 /* leaf.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = leaf.mtl; sourceTree = "<group>"; };
+		F4216A021CBB1DFA00F45903 /* leaf.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = leaf.obj; sourceTree = "<group>"; };
+		F4216A031CBB1E1100F45903 /* needle.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = needle.mtl; sourceTree = "<group>"; };
+		F4216A041CBB1E1100F45903 /* needle.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = needle.obj; sourceTree = "<group>"; };
+		F4216A061CBB1E1700F45903 /* Vile_Liquid.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Vile_Liquid.jpg; sourceTree = "<group>"; };
+		F4216A071CBB1E2A00F45903 /* pill.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill.mtl; sourceTree = "<group>"; };
+		F4216A081CBB1E2A00F45903 /* pill.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill.obj; sourceTree = "<group>"; };
+		F4216A091CBB1E2A00F45903 /* pill2.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill2.mtl; sourceTree = "<group>"; };
+		F4216A0A1CBB1E2A00F45903 /* pill2.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill2.obj; sourceTree = "<group>"; };
+		F4216A0B1CBB1E2A00F45903 /* pill3.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill3.mtl; sourceTree = "<group>"; };
+		F4216A0C1CBB1E2A00F45903 /* pill3.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill3.obj; sourceTree = "<group>"; };
+		F4216A0D1CBB1EAC00F45903 /* alstonia.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = alstonia.mtl; sourceTree = "<group>"; };
+		F4216A0E1CBB1EAC00F45903 /* alstonia.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = alstonia.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +140,22 @@
 		2BC043071CBA1AA700280B20 /* Objetos */ = {
 			isa = PBXGroup;
 			children = (
+				F4216A0D1CBB1EAC00F45903 /* alstonia.mtl */,
+				F4216A0E1CBB1EAC00F45903 /* alstonia.obj */,
+				F4216A071CBB1E2A00F45903 /* pill.mtl */,
+				F4216A081CBB1E2A00F45903 /* pill.obj */,
+				F4216A091CBB1E2A00F45903 /* pill2.mtl */,
+				F4216A0A1CBB1E2A00F45903 /* pill2.obj */,
+				F4216A0B1CBB1E2A00F45903 /* pill3.mtl */,
+				F4216A0C1CBB1E2A00F45903 /* pill3.obj */,
+				F4216A051CBB1E1700F45903 /* needle */,
+				F4216A031CBB1E1100F45903 /* needle.mtl */,
+				F4216A041CBB1E1100F45903 /* needle.obj */,
+				F4216A011CBB1DFA00F45903 /* leaf.mtl */,
+				F4216A021CBB1DFA00F45903 /* leaf.obj */,
+				F42169FD1CBB1BA100F45903 /* med+bottle */,
+				F42169FF1CBB1BA100F45903 /* med+bottle.mtl */,
+				F4216A001CBB1BA100F45903 /* med+bottle.obj */,
 				2BC043081CBA1AA700280B20 /* boy */,
 				2BC043151CBA1AA700280B20 /* boy.mtl */,
 				2BC043161CBA1AA700280B20 /* boy.obj */,
@@ -157,6 +189,22 @@
 				2BC043181CBA1ABC00280B20 /* diffuse.bmp */,
 			);
 			path = Texturas;
+			sourceTree = "<group>";
+		};
+		F42169FD1CBB1BA100F45903 /* med+bottle */ = {
+			isa = PBXGroup;
+			children = (
+				F42169FE1CBB1BA100F45903 /* med_label.png */,
+			);
+			path = "med+bottle";
+			sourceTree = "<group>";
+		};
+		F4216A051CBB1E1700F45903 /* needle */ = {
+			isa = PBXGroup;
+			children = (
+				F4216A061CBB1E1700F45903 /* Vile_Liquid.jpg */,
+			);
+			path = needle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
