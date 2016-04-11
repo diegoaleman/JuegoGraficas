@@ -165,7 +165,8 @@ void dibujaVidas(){
     }
 }
 
-void dibujaPuntaje(){
+void dibujaPuntaje()
+{
     char mensaje [200] = "";
     sprintf(mensaje, "%s", "123");
     glColor3f(0, 0 , 0);
@@ -178,17 +179,16 @@ void dibujaPuntaje(){
 
 void dibujaJugador()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+   
+    //glClear(GL_DEPTH_BUFFER_BIT);
 
     
     glPushMatrix();
-    glTranslated(posX, posY, -1.2);
-    glRotated(90, 0, 0, 0);
-    glScaled(1.2, 1.2, 1.2);
-    glPushMatrix();
+    glTranslated(posX, posY, 0);
+    glRotated(90, 1, 0, 0);
     glRotated(rotado, 0, 1, 0);
+    glScaled(1.2, 1.2, 1.2);
     glmDraw(&models[PLAYER_MOD], GLM_COLOR | GLM_FLAT);
-    glPopMatrix();
     glPopMatrix();
     
     
@@ -197,7 +197,8 @@ void dibujaJugador()
 
 void dibujaPildoraRoja()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    
+    //glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -210,7 +211,7 @@ void dibujaPildoraRoja()
 
 void dibujaPildoraAmarilla()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -223,7 +224,7 @@ void dibujaPildoraAmarilla()
 
 void dibujaPildoraBlanca()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -236,7 +237,7 @@ void dibujaPildoraBlanca()
 
 void dibujaArbol()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+  //  glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -270,7 +271,7 @@ void dibujaArbol()
 
 void dibujaHoja()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -286,7 +287,7 @@ void dibujaHoja()
 
 void dibujaMeds()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+    //glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -299,7 +300,7 @@ void dibujaMeds()
 
 void dibujaJeringa()
 {
-    glClear(GL_DEPTH_BUFFER_BIT);
+   // glClear(GL_DEPTH_BUFFER_BIT);
     
     
     glPushMatrix();
@@ -312,8 +313,8 @@ void dibujaJeringa()
 
 void dibujaEscenario(){
     
-    glClearColor(1.0,1.0,1.0,1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+   // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
     
@@ -340,17 +341,15 @@ void dibujaEscenario(){
     glDisable(GL_TEXTURE_2D);
     
     glPopMatrix();
-    glutPostRedisplay();
+  //  glutPostRedisplay();
 
 }
 
 void display(){
-    
+    glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
     dibujaEscenario();
-    
     dibujaPildoraRoja();
     dibujaPildoraAmarilla();
     dibujaPildoraBlanca();
@@ -358,13 +357,10 @@ void display(){
     dibujaHoja();
     dibujaMeds();
     dibujaJeringa();
-    
     dibujaJugador();
-    
     dibujaCronometro();
     dibujaVidas();
     dibujaPuntaje();
-    glPopMatrix();
     
 
     
@@ -379,11 +375,11 @@ void reshape(int w, int h){
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glFrustum(-fieldWidth, fieldWidth, -fieldHeight, fieldHeight, 10.0, 30.0);
+    glFrustum(-fieldWidth, fieldWidth, -fieldHeight, fieldHeight, 9.0, 20.0);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
+    gluLookAt(0, 0, 11, 0, 0, 0, 0, 1, 0);
     
 }
 
@@ -479,10 +475,10 @@ void myKeyboard(unsigned char theKey, int x, int y){
     
 }
 void mousePasivo(int x, int y){
-    mouseX = x;
-    mouseY = y;
+    mouseX = (x - 400) * 2;
+    mouseY = ((y - 400) * 2) * -1;
     rotado = (mouseX - posX) / (mouseY-posY);
-    cout << rotado << endl;
+    cout << mouseX << ","<<mouseY<<endl;
 }
 
 void mouseActivo(int button, int state, int x, int y){
