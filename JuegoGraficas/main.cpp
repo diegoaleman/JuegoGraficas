@@ -477,8 +477,8 @@ void myKeyboard(unsigned char theKey, int x, int y){
 void mousePasivo(int x, int y){
     mouseX = (x - 400) * 2;
     mouseY = ((y - 400) * 2) * -1;
-    rotado = (mouseX - posX) / (mouseY-posY);
-    cout << mouseX << ","<<mouseY<<endl;
+    rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
+    cout << rotado <<endl;
 }
 
 void mouseActivo(int button, int state, int x, int y){
