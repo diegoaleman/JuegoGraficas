@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JuegoGraficas/main.cpp"
-            timestampString = "482043186.95716"
+            timestampString = "482216307.743758"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "init()"
             landmarkType = "7">
          </BreakpointContent>
