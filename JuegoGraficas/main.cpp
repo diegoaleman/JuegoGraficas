@@ -28,11 +28,12 @@ using namespace std;
 
 int screenWidth = 800,screenHeight = 800;
 double fieldWidth = 10.0, fieldHeight = 10.0;
-double posX = 0, posY = 0;
+double posX = 0, posY = -1;
 double rotado = 0;
 double mouseX, mouseY;
 double ballX = 0, ballY = 0;
 bool shoot = false, op1 = false, op2 = false, op3 = false, op4 = false;
+double mouseNormPosX = 0, mouseNormPosY = 0, distanceX = 0, distanceY = 0;
 
 float delta=0.1;
 float t=-1.0;
@@ -115,20 +116,17 @@ void timer(int i) {
     delta = 0.1;
     t += delta;
     
+    cout << "Norm pos" <<endl;
+    cout << "mousex: " << mouseX/72.72 << " mousey: " << mouseY/72.72 <<endl;
+    
+    distanceX = mouseX/72.72 - posX;
+    distanceY = mouseY/72.72 - posY;
+    
+    double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
+    double easingAmount = 0.1;
     if (shoot) {
-        if (op1) {
-            ballY += 1;
-            ballX +=1 ;
-        } else if (op2) {
-            ballY += 1;
-            ballX -=1;
-        } else if (op3) {
-            ballX -= 1;
-            ballY -= 1;
-        } else {
-            ballY -= 1;
-            ballX +=1;
-        }
+        ballY += distanceY * easingAmount;
+        ballX += distanceX * easingAmount;
         
         if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10) {
             shoot = false;
@@ -532,8 +530,8 @@ void mousePasivo(int x, int y){
 }
 
 void resetBallPosition() {
-    ballX = 0;
-    ballY = 0;
+    ballX = posX;
+    ballY = posY;
 }
 
 void mouseActivo(int button, int state, int x, int y){
