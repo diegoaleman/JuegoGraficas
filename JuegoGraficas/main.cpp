@@ -20,20 +20,32 @@
 #include <string>
 #include <cstring>
 #include <math.h>
+#include<cstdlib>
+#include<ctime>
 
 #include "glm.h"
 #include "ImageLoader.h"
 
 using namespace std;
 
-int screenWidth = 800,screenHeight = 800;
+int screenWidth = 800, screenHeight = 800;
 double fieldWidth = 10.0, fieldHeight = 10.0;
 double posX = 0, posY = 0;
 double rotado = 0;
 double mouseX, mouseY;
 
+
+// Posiciones de drogas
+double xPilAmarilla, yPilAmarilla;
+double xPilRoja, yPilRoja;
+double xPilBlanca, yPilBlanca;
+double xHoja, yHoja;
+double xMeds, yMeds;
+double xJeringa, yJeringa;
+
 float delta=0.1;
 float t=-1.0;
+
 int sumaTotal = 0;
 
 string fullPath = __FILE__;
@@ -108,8 +120,8 @@ void timer(int i) {
         sumaTotal += 1;
     //}
     
-    delta = 0.1;
-    t += delta;
+    //delta = 0.1;
+    //t += delta;
     glutPostRedisplay();
     glutTimerFunc(100,timer,1);
 
@@ -181,7 +193,6 @@ void dibujaJugador()
 {
    
     //glClear(GL_DEPTH_BUFFER_BIT);
-
     
     glPushMatrix();
     glTranslated(posX, posY, 0);
@@ -191,6 +202,7 @@ void dibujaJugador()
     glmDraw(&models[PLAYER_MOD], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
     
+    cout << posX << "-" << posY << endl;
     
  
 }
@@ -200,9 +212,14 @@ void dibujaPildoraRoja()
     
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xPilRoja;
+    float distY = posY - yPilRoja;
+    
+    xPilRoja += distX * 0.05;
+    yPilRoja += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(5, 5, 0);
+    glTranslated(xPilRoja, yPilRoja, 0);
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[PILL_ONE], GLM_COLOR | GLM_FLAT);
@@ -213,9 +230,15 @@ void dibujaPildoraAmarilla()
 {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xPilAmarilla;
+    float distY = posY - yPilAmarilla;
+    
+    xPilAmarilla += distX * 0.05;
+    yPilAmarilla += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(-5, 5, 0);
+    //glTranslated(11, 11, 0);
+    glTranslated(xPilAmarilla, yPilAmarilla, 0);
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[PILL_TWO], GLM_COLOR | GLM_FLAT);
@@ -226,9 +249,14 @@ void dibujaPildoraBlanca()
 {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xPilBlanca;
+    float distY = posY - yPilBlanca;
+    
+    xPilBlanca += distX * 0.05;
+    yPilBlanca += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(-5, -5, 0);
+    glTranslated(xPilBlanca, yPilBlanca, 0);
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[PILL_THREE], GLM_COLOR | GLM_FLAT);
@@ -273,9 +301,14 @@ void dibujaHoja()
 {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xHoja;
+    float distY = posY - yHoja;
+    
+    xHoja += distX * 0.05;
+    yHoja += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(5, -5, 0);
+    glTranslated(xHoja, yHoja, 0);
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glPushMatrix();
@@ -289,9 +322,14 @@ void dibujaMeds()
 {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xMeds;
+    float distY = posY - yMeds;
+    
+    xMeds += distX * 0.05;
+    yMeds += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(0, -5, 0);
+    glTranslated(xMeds, yMeds, 0);
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[MEDS], GLM_COLOR | GLM_FLAT);
@@ -302,9 +340,14 @@ void dibujaJeringa()
 {
    // glClear(GL_DEPTH_BUFFER_BIT);
     
+    float distX = posX - xJeringa;
+    float distY = posY - yJeringa;
+    
+    xJeringa += distX * 0.05;
+    yJeringa += distY * 0.05;
     
     glPushMatrix();
-    glTranslated(0, 5, 0);
+    glTranslated(xJeringa, yJeringa, 0);
     glRotated(90, 0, 0, 0);
     glScaled(1.5, 1.5, 1.5);
     glmDraw(&models[NEEDLE], GLM_COLOR | GLM_FLAT);
@@ -353,14 +396,14 @@ void display(){
     dibujaPildoraRoja();
     dibujaPildoraAmarilla();
     dibujaPildoraBlanca();
-    dibujaArbol();
+    //dibujaArbol();
     dibujaHoja();
     dibujaMeds();
     dibujaJeringa();
     dibujaJugador();
-    dibujaCronometro();
-    dibujaVidas();
-    dibujaPuntaje();
+    //dibujaCronometro();
+    //dibujaVidas();
+    //dibujaPuntaje();
     
 
     
@@ -383,7 +426,43 @@ void reshape(int w, int h){
     
 }
 
+double getRandom(){
+    double numRand = rand() % 5 + 10;
+    
+    double signo = rand() % 10 +1;
+    
+    if (signo >= 5){
+        return -1 * numRand;
+    }
+    else{
+        return numRand;
+    }
+}
+
 void init(){
+    srand(time(0));
+    
+    xPilAmarilla = getRandom() - (rand() %10);
+    yPilAmarilla = getRandom();
+    
+    xPilRoja = getRandom() - (rand() %10);
+    yPilRoja = getRandom();
+
+    xPilBlanca = getRandom() - (rand() %10);
+    yPilBlanca = getRandom();
+
+    xHoja = getRandom();
+    yHoja = getRandom() - (rand() %10);
+    
+    xMeds = getRandom();
+    yMeds = getRandom() - (rand() %10);
+    
+    xJeringa = getRandom();
+    yJeringa = getRandom() - (rand() %10);
+    
+    
+    
+    
     //General settings
     glClearColor(0,0,0, 1.0);
     glEnable(GL_DEPTH_TEST);
@@ -478,7 +557,7 @@ void mousePasivo(int x, int y){
     mouseX = (x - 400) * 2;
     mouseY = ((y - 400) * 2) * -1;
     rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
-    cout << rotado <<endl;
+    //cout << rotado <<endl;
 }
 
 void mouseActivo(int button, int state, int x, int y){
