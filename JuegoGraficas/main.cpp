@@ -386,13 +386,13 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     dibujaEscenario();
-//    dibujaPildoraRoja();
-//    dibujaPildoraAmarilla();
-//    dibujaPildoraBlanca();
-//    dibujaArbol();
-//    dibujaHoja();
-//    dibujaMeds();
-//    dibujaJeringa();
+//  dibujaPildoraRoja();
+    dibujaPildoraAmarilla();
+//  dibujaPildoraBlanca();
+//  dibujaArbol();
+//  dibujaHoja();
+//  dibujaMeds();
+//  dibujaJeringa();
     if (shoot) {
         dibujaBola();
     }
