@@ -20,8 +20,9 @@
 #include <string>
 #include <cstring>
 #include <math.h>
-#include<cstdlib>
-#include<ctime>
+#include <cstdlib>
+#include <ctime>
+#include <string>
 
 #include "glm.h"
 #include "ImageLoader.h"
@@ -43,12 +44,17 @@ double xHoja, yHoja;
 double xMeds, yMeds;
 double xJeringa, yJeringa;
 
+double deltaPilAmarilla;
+
 float delta=0.1;
 float t=-1.0;
 
 int sumaTotal = 0;
 
 string fullPath = __FILE__;
+
+int score;
+int vidas;
 
 #define MODEL_COUNT 10
 #define PLAYER_MOD 0
@@ -130,6 +136,18 @@ void timer(int i) {
 
 }
 
+double getRandom(){
+    double numRand = rand() % 5 + 10;
+    double signo = rand() % 10 +1;
+    
+    if (signo >= 5){
+        return -1 * numRand;
+    }
+    else{
+        return numRand;
+    }
+}
+
 void dibujaCronometro(){
     GLint k;
     
@@ -168,21 +186,33 @@ void dibujaCronometro(){
 
 void dibujaVidas(){
     char mensaje [200] = "";
-    sprintf(mensaje, "%s", "O O O");
+    
+    if (vidas == 3){
+        sprintf(mensaje, "%s", "O O O");
+    }
+    else if(vidas == 2){
+        sprintf(mensaje, "%s", "O O");
+    }
+    else if (vidas == 1){
+        sprintf(mensaje, "%s", "O");
+    }
+    else {
+        sprintf(mensaje, "%s", "");
+    }
     glColor3f(0, 0 , 0);
-    glRasterPos2f(-8, 9); // inicializa raster position
+    glRasterPos2f(-8, 10); // inicializa raster position
     for (int k=0; mensaje[k] != '\0'; k++) {
         glColor3f(1, 1, 1);
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
     }
 }
 
-void dibujaPuntaje()
-{
+void dibujaPuntaje(){
     char mensaje [200] = "";
-    sprintf(mensaje, "%s", "123");
+    string s = to_string(score);
+    sprintf(mensaje, "%s", s.c_str());
     glColor3f(0, 0 , 0);
-    glRasterPos2f(8, 9); // inicializa raster position
+    glRasterPos2f(8, 10); // inicializa raster position
     for (int k=0; mensaje[k] != '\0'; k++) {
         glColor3f(1, 1, 1);
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
@@ -203,6 +233,7 @@ void dibujaJugador()
     glPopMatrix();
     
     cout << posX << "-" << posY << endl;
+
     
  
 }
@@ -226,15 +257,32 @@ void dibujaPildoraRoja()
     glPopMatrix();
 }
 
-void dibujaPildoraAmarilla()
-{
+bool revisaColision(double x1, double y1, double x2, double y2){
+    if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55){
+        vidas--;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+void dibujaPildoraAmarilla(){
     //glClear(GL_DEPTH_BUFFER_BIT);
+    
+    if (revisaColision(xPilAmarilla, yPilAmarilla, posX, posY)){
+        deltaPilAmarilla = 0.001;
+        xPilAmarilla = getRandom() - (rand() %10);
+        yPilAmarilla = getRandom();
+    }
     
     float distX = posX - xPilAmarilla;
     float distY = posY - yPilAmarilla;
     
-    xPilAmarilla += distX * 0.05;
-    yPilAmarilla += distY * 0.05;
+    deltaPilAmarilla += 0.001;
+    
+    xPilAmarilla += distX * deltaPilAmarilla;
+    yPilAmarilla += distY * deltaPilAmarilla;
     
     glPushMatrix();
     //glTranslated(11, 11, 0);
@@ -245,8 +293,7 @@ void dibujaPildoraAmarilla()
     glPopMatrix();
 }
 
-void dibujaPildoraBlanca()
-{
+void dibujaPildoraBlanca(){
     //glClear(GL_DEPTH_BUFFER_BIT);
     
     float distX = posX - xPilBlanca;
@@ -263,8 +310,7 @@ void dibujaPildoraBlanca()
     glPopMatrix();
 }
 
-void dibujaArbol()
-{
+void dibujaArbol(){
   //  glClear(GL_DEPTH_BUFFER_BIT);
     
     
@@ -393,17 +439,17 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     dibujaEscenario();
-    dibujaPildoraRoja();
+    //dibujaPildoraRoja();
     dibujaPildoraAmarilla();
-    dibujaPildoraBlanca();
+    //dibujaPildoraBlanca();
     //dibujaArbol();
-    dibujaHoja();
-    dibujaMeds();
-    dibujaJeringa();
+    //dibujaHoja();
+    //dibujaMeds();
+    //dibujaJeringa();
     dibujaJugador();
     //dibujaCronometro();
-    //dibujaVidas();
-    //dibujaPuntaje();
+    dibujaVidas();
+    dibujaPuntaje();
     
 
     
@@ -426,18 +472,7 @@ void reshape(int w, int h){
     
 }
 
-double getRandom(){
-    double numRand = rand() % 5 + 10;
-    
-    double signo = rand() % 10 +1;
-    
-    if (signo >= 5){
-        return -1 * numRand;
-    }
-    else{
-        return numRand;
-    }
-}
+
 
 void init(){
     srand(time(0));
@@ -459,6 +494,13 @@ void init(){
     
     xJeringa = getRandom();
     yJeringa = getRandom() - (rand() %10);
+    
+    
+    
+    
+    deltaPilAmarilla = 0.001;
+    score = 0;
+    vidas = 3;
     
     
     
@@ -528,7 +570,6 @@ void init(){
 }
 
 void myKeyboard(unsigned char theKey, int x, int y){
-
     switch (theKey){
         case 'w':
         case 'W':
