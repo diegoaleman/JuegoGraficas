@@ -82,6 +82,10 @@
 		F4216A0C1CBB1E2A00F45903 /* pill3.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = pill3.obj; sourceTree = "<group>"; };
 		F4216A0D1CBB1EAC00F45903 /* alstonia.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = alstonia.mtl; sourceTree = "<group>"; };
 		F4216A0E1CBB1EAC00F45903 /* alstonia.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = alstonia.obj; sourceTree = "<group>"; };
+		F471B42D1CBE038F004BED57 /* ball.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ball.mtl; sourceTree = "<group>"; };
+		F471B42E1CBE038F004BED57 /* ball.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ball.obj; sourceTree = "<group>"; };
+		F471B42F1CBE038F004BED57 /* cross.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.mtl; sourceTree = "<group>"; };
+		F471B4301CBE038F004BED57 /* cross.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,10 @@
 		2BC043071CBA1AA700280B20 /* Objetos */ = {
 			isa = PBXGroup;
 			children = (
+				F471B42D1CBE038F004BED57 /* ball.mtl */,
+				F471B42E1CBE038F004BED57 /* ball.obj */,
+				F471B42F1CBE038F004BED57 /* cross.mtl */,
+				F471B4301CBE038F004BED57 /* cross.obj */,
 				F4216A0D1CBB1EAC00F45903 /* alstonia.mtl */,
 				F4216A0E1CBB1EAC00F45903 /* alstonia.obj */,
 				F4216A071CBB1E2A00F45903 /* pill.mtl */,

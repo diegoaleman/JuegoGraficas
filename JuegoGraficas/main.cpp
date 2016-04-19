@@ -31,9 +31,12 @@ using namespace std;
 
 int screenWidth = 800, screenHeight = 800;
 double fieldWidth = 10.0, fieldHeight = 10.0;
-double posX = 0, posY = 0;
+double posX = 0, posY = -1;
 double rotado = 0;
 double mouseX, mouseY;
+double ballX = 0, ballY = 0;
+bool shoot = false, op1 = false, op2 = false, op3 = false, op4 = false;
+double mouseNormPosX = 0, mouseNormPosY = 0, distanceX = 0, distanceY = 0;
 
 
 // Posiciones de drogas
@@ -65,10 +68,12 @@ int vidas;
 #define NEEDLE 5
 #define MEDS 6
 #define TREE 7
+#define CROSS 8
+#define BALL 9
 
 GLMmodel models[MODEL_COUNT];
 
-const int TEXTURE_COUNT=8;
+const int TEXTURE_COUNT=10;
 static GLuint texName[TEXTURE_COUNT];
 
 void getParentPath(){
@@ -126,14 +131,29 @@ void timer(int i) {
         sumaTotal += 1;
     //}
     
-    //delta = 0.1;
-    //t += delta;
+    delta = 0.1;
+    t += delta;
+    
+    cout << "Norm pos" <<endl;
+    cout << "mousex: " << mouseX/72.72 << " mousey: " << mouseY/72.72 <<endl;
+    
+    distanceX = mouseX/72.72 - posX;
+    distanceY = mouseY/72.72 - posY;
+    
+    double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
+    double easingAmount = 0.1;
+    if (shoot) {
+        ballY += distanceY * easingAmount;
+        ballX += distanceX * easingAmount;
+        
+        if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10) {
+            shoot = false;
+        }
+    }
+    
+
     glutPostRedisplay();
-    glutTimerFunc(100,timer,1);
-
-    //glutPostRedisplay();
-    //glutTimerFunc(100, timer, 1);
-
+    glutTimerFunc(800,timer,1);
 }
 
 double getRandom(){
@@ -400,6 +420,19 @@ void dibujaJeringa()
     glPopMatrix();
 }
 
+void dibujaBola()
+{
+    // glClear(GL_DEPTH_BUFFER_BIT);
+    
+    
+    glPushMatrix();
+    glTranslated(ballX, ballY, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[BALL], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
 void dibujaEscenario(){
     
     
@@ -439,25 +472,25 @@ void display(){
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     dibujaEscenario();
-    //dibujaPildoraRoja();
+//  dibujaPildoraRoja();
     dibujaPildoraAmarilla();
-    //dibujaPildoraBlanca();
-    //dibujaArbol();
-    //dibujaHoja();
-    //dibujaMeds();
-    //dibujaJeringa();
+//  dibujaPildoraBlanca();
+//  dibujaArbol();
+//  dibujaHoja();
+//  dibujaMeds();
+//  dibujaJeringa();
+    
+    
+    if (shoot) {
+        dibujaBola();
+    }
     dibujaJugador();
     //dibujaCronometro();
     dibujaVidas();
     dibujaPuntaje();
     
 
-    
     glutSwapBuffers();
-    
-
-
-    
 }
 
 void reshape(int w, int h){
@@ -566,6 +599,19 @@ void init(){
     glmUnitize(&models[NEEDLE]);
     glmVertexNormals(&models[NEEDLE], 90.0, GL_TRUE);
     
+    //cruz
+    ruta = fullPath + "Objetos/cross.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[CROSS] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[CROSS]);
+    glmVertexNormals(&models[CROSS], 90.0, GL_TRUE);
+    
+    //bola roja
+    ruta = fullPath + "Objetos/ball.obj";
+    cout << "Filepath: " << ruta << std::endl;
+    models[BALL] = *glmReadOBJ(ruta.c_str());
+    glmUnitize(&models[BALL]);
+    glmVertexNormals(&models[BALL], 90.0, GL_TRUE);
     
 }
 
@@ -598,12 +644,41 @@ void mousePasivo(int x, int y){
     mouseX = (x - 400) * 2;
     mouseY = ((y - 400) * 2) * -1;
     rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
+
     //cout << rotado <<endl;
+    cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
+}
+
+void resetBallPosition() {
+    ballX = posX;
+    ballY = posY;
 }
 
 void mouseActivo(int button, int state, int x, int y){
-    
-    
+    if (mouseY >= 0 && mouseX >= 0) {
+        op1 = true;
+        op2 = false;
+        op3 = false;
+        op4 = false;
+    } else if (mouseY >= 0 && mouseX < 0) {
+        op1 = false;
+        op2 = true;
+        op3 = false;
+        op4 = false;
+    } else if (mouseY < 0 && mouseX < 0) {
+        op1 = false;
+        op2 = false;
+        op3 = true;
+        op4 = false;
+    } else {
+        op1 = false;
+        op2 = false;
+        op3 = false;
+        op4 = true;
+    }
+    resetBallPosition();
+    shoot = true;
+    glutTimerFunc(800, timer, 1);
 }
 
 int main(int argc, char *argv[]) {
@@ -620,7 +695,7 @@ int main(int argc, char *argv[]) {
     glutKeyboardFunc(myKeyboard);
     glutPassiveMotionFunc(mousePasivo);
     glutMouseFunc(mouseActivo);
-    glutTimerFunc(10, timer, 1);
+    glutTimerFunc(800, timer, 1);
     glutMainLoop();
     return EXIT_SUCCESS;
 }
