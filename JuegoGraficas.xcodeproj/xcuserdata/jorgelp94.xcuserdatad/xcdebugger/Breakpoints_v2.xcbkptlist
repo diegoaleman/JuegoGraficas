@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JuegoGraficas/main.cpp"
-            timestampString = "482695917.352698"
+            timestampString = "482810328.202041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "441"
-            endingLineNumber = "441"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
             landmarkName = "dibujaJeringa()"
             landmarkType = "7">
          </BreakpointContent>

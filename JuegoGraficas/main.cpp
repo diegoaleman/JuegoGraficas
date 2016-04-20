@@ -136,9 +136,11 @@ void timer(int i) {
     
     cout << "Norm pos" <<endl;
     cout << "mousex: " << mouseX/72.72 << " mousey: " << mouseY/72.72 <<endl;
+    if (!shoot) {
+        distanceX = mouseX/72.72 - posX;
+        distanceY = mouseY/72.72 - posY;
+    }
     
-    distanceX = mouseX/72.72 - posX;
-    distanceY = mouseY/72.72 - posY;
     
     double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
     double easingAmount = 0.1;
@@ -710,13 +712,11 @@ void mousePasivo(int x, int y){
     mouseX = (x - 400) * 2;
     mouseY = ((y - 400) * 2) * -1;
     rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
-
+    
     //cout << rotado <<endl;
     cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
+    
 }
-
-
-
 
 
 void mouseActivo(int button, int state, int x, int y){
