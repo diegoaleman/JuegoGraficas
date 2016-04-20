@@ -86,6 +86,7 @@
 		F471B42E1CBE038F004BED57 /* ball.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ball.obj; sourceTree = "<group>"; };
 		F471B42F1CBE038F004BED57 /* cross.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.mtl; sourceTree = "<group>"; };
 		F471B4301CBE038F004BED57 /* cross.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.obj; sourceTree = "<group>"; };
+		F4E824651CC758C8005DAA64 /* Inicio.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Inicio.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +196,7 @@
 			children = (
 				2B34E7F11CBAB77100673258 /* pasto.bmp */,
 				2BC043181CBA1ABC00280B20 /* diffuse.bmp */,
+				F4E824651CC758C8005DAA64 /* Inicio.bmp */,
 			);
 			path = Texturas;
 			sourceTree = "<group>";

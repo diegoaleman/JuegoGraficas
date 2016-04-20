@@ -135,10 +135,10 @@ void timer(int i) {
     t += delta;
     
     cout << "Norm pos" <<endl;
-    cout << "mousex: " << mouseX/72.72 << " mousey: " << mouseY/72.72 <<endl;
+    cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
     if (!shoot) {
-        distanceX = mouseX/72.72 - posX;
-        distanceY = mouseY/72.72 - posY;
+        distanceX = mouseX/80 - posX;
+        distanceY = mouseY/80 - posY;
     }
     
     
@@ -292,8 +292,6 @@ void dibujaJugador(){
     
     cout << posX << "-" << posY << endl;
 
-    
- 
 }
 
 void dibujaPildoraRoja(){
@@ -494,9 +492,6 @@ bool revisaColisionBalaDrogas(double x, double y){
 }
 
 
-
-
-
 void dibujaBola() {
     // glClear(GL_DEPTH_BUFFER_BIT);
     
@@ -587,7 +582,6 @@ void reshape(int w, int h){
 void init(){
     srand(time(0));
     
-    
     resetPilRoja();
     resetPilBlanca();
     resetPilAmarilla();
@@ -595,15 +589,9 @@ void init(){
     resetMeds();
     resetJeringa();
     
-    
-    
-    
-    
     deltaPilAmarilla = 0.001;
     score = 0;
     vidas = 3;
-    
-    
     
     
     //General settings
@@ -704,7 +692,6 @@ void myKeyboard(unsigned char theKey, int x, int y){
         case 27:
             exit(0);
             break;
-        
     }
     
 }
@@ -720,27 +707,7 @@ void mousePasivo(int x, int y){
 
 
 void mouseActivo(int button, int state, int x, int y){
-    if (mouseY >= 0 && mouseX >= 0) {
-        op1 = true;
-        op2 = false;
-        op3 = false;
-        op4 = false;
-    } else if (mouseY >= 0 && mouseX < 0) {
-        op1 = false;
-        op2 = true;
-        op3 = false;
-        op4 = false;
-    } else if (mouseY < 0 && mouseX < 0) {
-        op1 = false;
-        op2 = false;
-        op3 = true;
-        op4 = false;
-    } else {
-        op1 = false;
-        op2 = false;
-        op3 = false;
-        op4 = true;
-    }
+   
     resetBallPosition();
     shoot = true;
     glutTimerFunc(800, timer, 1);
