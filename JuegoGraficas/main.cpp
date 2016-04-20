@@ -168,6 +168,43 @@ double getRandom(){
     }
 }
 
+void resetPilAmarilla(){
+    deltaPilAmarilla = 0.001;
+    xPilAmarilla = getRandom() - (rand() %10);
+    yPilAmarilla = getRandom();
+}
+
+void resetPilBlanca(){
+    xPilBlanca = getRandom() - (rand() %10);
+    yPilBlanca = getRandom();
+}
+
+void resetPilRoja(){
+    xPilRoja = getRandom() - (rand() %10);
+    yPilRoja = getRandom();
+    
+}
+
+void resetHoja(){
+    xHoja = getRandom();
+    yHoja = getRandom() - (rand() %10);
+}
+
+void resetMeds(){
+    xMeds = getRandom();
+    yMeds = getRandom() - (rand() %10);
+}
+
+void resetJeringa(){
+    xJeringa = getRandom();
+    yJeringa = getRandom() - (rand() %10);
+}
+
+void resetBallPosition() {
+    ballX = posX;
+    ballY = posY;
+}
+
 void dibujaCronometro(){
     GLint k;
     
@@ -196,7 +233,7 @@ void dibujaCronometro(){
     
     
     glColor3f(0, 0 , 0);
-    glRasterPos2f(-1, 9); // inicializa raster position
+    glRasterPos2f(-1, 10); // inicializa raster position
     for (k=0; mensaje[k] != '\0'; k++) {
         glColor3f(1, 1, 1);
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
@@ -239,8 +276,7 @@ void dibujaPuntaje(){
     }
 }
 
-void dibujaJugador()
-{
+void dibujaJugador(){
    
     //glClear(GL_DEPTH_BUFFER_BIT);
     
@@ -258,8 +294,7 @@ void dibujaJugador()
  
 }
 
-void dibujaPildoraRoja()
-{
+void dibujaPildoraRoja(){
     
     //glClear(GL_DEPTH_BUFFER_BIT);
     
@@ -277,7 +312,7 @@ void dibujaPildoraRoja()
     glPopMatrix();
 }
 
-bool revisaColision(double x1, double y1, double x2, double y2){
+bool revisaColisionDrogaJugador(double x1, double y1, double x2, double y2){
     if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55){
         vidas--;
         return true;
@@ -290,10 +325,8 @@ bool revisaColision(double x1, double y1, double x2, double y2){
 void dibujaPildoraAmarilla(){
     //glClear(GL_DEPTH_BUFFER_BIT);
     
-    if (revisaColision(xPilAmarilla, yPilAmarilla, posX, posY)){
-        deltaPilAmarilla = 0.001;
-        xPilAmarilla = getRandom() - (rand() %10);
-        yPilAmarilla = getRandom();
+    if (revisaColisionDrogaJugador(xPilAmarilla, yPilAmarilla, posX, posY)){
+        resetPilAmarilla();
     }
     
     float distX = posX - xPilAmarilla;
@@ -363,8 +396,7 @@ void dibujaArbol(){
     glPopMatrix();
 }
 
-void dibujaHoja()
-{
+void dibujaHoja(){
     //glClear(GL_DEPTH_BUFFER_BIT);
     
     float distX = posX - xHoja;
@@ -384,8 +416,7 @@ void dibujaHoja()
     glPopMatrix();
 }
 
-void dibujaMeds()
-{
+void dibujaMeds() {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
     float distX = posX - xMeds;
@@ -402,8 +433,7 @@ void dibujaMeds()
     glPopMatrix();
 }
 
-void dibujaJeringa()
-{
+void dibujaJeringa() {
    // glClear(GL_DEPTH_BUFFER_BIT);
     
     float distX = posX - xJeringa;
@@ -420,10 +450,59 @@ void dibujaJeringa()
     glPopMatrix();
 }
 
-void dibujaBola()
-{
+
+
+
+bool revisaColisionBalaDrogas(double x, double y){
+    
+    if(fabs(x-xPilAmarilla) <= 0.55 && fabs(y-yPilAmarilla) <= 0.55){
+        shoot = false;
+        resetPilAmarilla();
+        return true;
+    }
+    else if (fabs(x-xPilBlanca) <= 0.55 && fabs(y-yPilBlanca) <= 0.55){
+        shoot = false;
+        resetPilBlanca();
+        return true;
+    }
+    else if (fabs(x-xPilRoja) <= 0.55 && fabs(y-yPilRoja) <= 0.55){
+        shoot = false;
+        resetPilRoja();
+        return true;
+    }
+    else if (fabs(x-xHoja) <= 0.55 && fabs(y-yHoja) <= 0.55){
+        shoot = false;
+        resetHoja();
+        return true;
+    }
+    else if (fabs(x-xMeds) <= 0.55 && fabs(y-yMeds) <= 0.55){
+        shoot = false;
+        resetMeds();
+        return true;
+    }
+    else if (fabs(x-xJeringa) <= 0.55 && fabs(y-yJeringa) <= 0.55){
+        shoot = false;
+        resetJeringa();
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+
+
+
+void dibujaBola() {
     // glClear(GL_DEPTH_BUFFER_BIT);
     
+    
+    if (revisaColisionBalaDrogas(ballX, ballY)){
+        score++;
+        //resetBallPosition();
+    }
     
     glPushMatrix();
     glTranslated(ballX, ballY, 0);
@@ -434,8 +513,6 @@ void dibujaBola()
 }
 
 void dibujaEscenario(){
-    
-    
    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
@@ -479,13 +556,11 @@ void display(){
 //  dibujaHoja();
 //  dibujaMeds();
 //  dibujaJeringa();
-    
-    
     if (shoot) {
         dibujaBola();
     }
     dibujaJugador();
-    //dibujaCronometro();
+    dibujaCronometro();
     dibujaVidas();
     dibujaPuntaje();
     
@@ -510,23 +585,14 @@ void reshape(int w, int h){
 void init(){
     srand(time(0));
     
-    xPilAmarilla = getRandom() - (rand() %10);
-    yPilAmarilla = getRandom();
     
-    xPilRoja = getRandom() - (rand() %10);
-    yPilRoja = getRandom();
-
-    xPilBlanca = getRandom() - (rand() %10);
-    yPilBlanca = getRandom();
-
-    xHoja = getRandom();
-    yHoja = getRandom() - (rand() %10);
+    resetPilRoja();
+    resetPilBlanca();
+    resetPilAmarilla();
+    resetHoja();
+    resetMeds();
+    resetJeringa();
     
-    xMeds = getRandom();
-    yMeds = getRandom() - (rand() %10);
-    
-    xJeringa = getRandom();
-    yJeringa = getRandom() - (rand() %10);
     
     
     
@@ -649,10 +715,9 @@ void mousePasivo(int x, int y){
     cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
 }
 
-void resetBallPosition() {
-    ballX = posX;
-    ballY = posY;
-}
+
+
+
 
 void mouseActivo(int button, int state, int x, int y){
     if (mouseY >= 0 && mouseX >= 0) {
