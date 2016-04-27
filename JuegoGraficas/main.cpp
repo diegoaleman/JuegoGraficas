@@ -710,6 +710,16 @@ void dibujaCreditos(){
 void dibujaGameOver(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    char mensaje [200] = "";
+    string s = to_string(score);
+    sprintf(mensaje, "%s", s.c_str());
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(8, 10); // inicializa raster position
+    for (int k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+    
     glPushMatrix();
     
     //Habilitar el uso de texturas
