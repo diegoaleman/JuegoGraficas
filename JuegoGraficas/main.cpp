@@ -36,6 +36,7 @@ double rotado = 0;
 double mouseX, mouseY;
 double ballX = 0, ballY = 0;
 bool shoot = false, op1 = false, op2 = false, op3 = false, op4 = false;
+bool inicio = true, instrucciones = false, creditos = false, gameover = false, informacion1 = false, informacion2 = false, informacion3 = false, jugando = false;
 double mouseNormPosX = 0, mouseNormPosY = 0, distanceX = 0, distanceY = 0;
 
 
@@ -123,6 +124,27 @@ void initRendering(){
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/diffuse.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Inicio.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Instrucciones.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/creditos.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Gameover.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion1.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion2.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion3.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
     delete image;
 }
 
@@ -205,6 +227,21 @@ void resetJeringa(){
 void resetBallPosition() {
     ballX = posX;
     ballY = posY;
+}
+
+void resetGame() {
+    posX = 0;
+    posY = 0;
+    jugando = true;
+    vidas = 3;
+    sumaTotal = 0;
+    score = 0;
+    inicio = false;
+    instrucciones = false;
+    creditos = false;
+    informacion3 = false;
+    informacion2 = false;
+    informacion1 = false;
 }
 
 void dibujaCronometro(){
@@ -312,9 +349,27 @@ void dibujaPildoraRoja(){
     glPopMatrix();
 }
 
+void muestraInfo() {
+    if (vidas == 2) {
+        informacion1 = true;
+        jugando = false;
+        glutPostRedisplay();
+    } else if (vidas == 1) {
+        informacion2 = true;
+        jugando = false;
+        glutPostRedisplay();
+    } else if (vidas == 0) {
+        
+        jugando = false;
+        gameover = true;
+        glutPostRedisplay();
+    }
+}
+
 bool revisaColisionDrogaJugador(double x1, double y1, double x2, double y2){
     if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55){
         vidas--;
+        muestraInfo();
         return true;
     }
     else{
@@ -348,6 +403,10 @@ void dibujaPildoraAmarilla(){
 
 void dibujaPildoraBlanca(){
     //glClear(GL_DEPTH_BUFFER_BIT);
+    
+    if (revisaColisionDrogaJugador(xPilBlanca, yPilBlanca, posX, posY)){
+        resetPilBlanca();
+    }
     
     float distX = posX - xPilBlanca;
     float distY = posY - yPilBlanca;
@@ -399,6 +458,10 @@ void dibujaArbol(){
 void dibujaHoja(){
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    if (revisaColisionDrogaJugador(xHoja, yHoja, posX, posY)){
+        resetHoja();
+    }
+    
     float distX = posX - xHoja;
     float distY = posY - yHoja;
     
@@ -419,6 +482,10 @@ void dibujaHoja(){
 void dibujaMeds() {
     //glClear(GL_DEPTH_BUFFER_BIT);
     
+    if (revisaColisionDrogaJugador(xMeds, yMeds, posX, posY)){
+        resetMeds();
+    }
+    
     float distX = posX - xMeds;
     float distY = posY - yMeds;
     
@@ -436,6 +503,10 @@ void dibujaMeds() {
 void dibujaJeringa() {
    // glClear(GL_DEPTH_BUFFER_BIT);
     
+    if (revisaColisionDrogaJugador(xJeringa, yJeringa, posX, posY)){
+        resetJeringa();
+    }
+    
     float distX = posX - xJeringa;
     float distY = posY - yJeringa;
     
@@ -449,8 +520,6 @@ void dibujaJeringa() {
     glmDraw(&models[NEEDLE], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
 }
-
-
 
 
 bool revisaColisionBalaDrogas(double x, double y){
@@ -483,6 +552,7 @@ bool revisaColisionBalaDrogas(double x, double y){
     else if (fabs(x-xJeringa) <= 0.55 && fabs(y-yJeringa) <= 0.55){
         shoot = false;
         resetJeringa();
+        
         return true;
     }
     else{
@@ -541,25 +611,272 @@ void dibujaEscenario(){
 
 }
 
+void dibujaPantallaInicio(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[1]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaInstrucciones(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[2]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaCreditos(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[3]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaGameOver(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[4]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaInformacion1(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[5]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaInformacion2(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[6]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaInformacion3(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[7]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(10.0f, -10.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(10.0f, 10.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-10.0f, 10.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
 void display(){
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    dibujaEscenario();
-//  dibujaPildoraRoja();
-    dibujaPildoraAmarilla();
-//  dibujaPildoraBlanca();
-//  dibujaArbol();
-//  dibujaHoja();
-//  dibujaMeds();
-//  dibujaJeringa();
-    if (shoot) {
-        dibujaBola();
+    if (inicio) {
+        dibujaPantallaInicio();
+    } else if (jugando){
+        dibujaEscenario();
+        //  dibujaPildoraRoja();
+        if (vidas == 3) {
+            dibujaPildoraAmarilla();
+        }
+        if (vidas == 2) {
+            dibujaHoja();
+        }
+        if (vidas == 1) {
+            dibujaMeds();
+        }
+        //  dibujaPildoraBlanca();
+        //  dibujaArbol();
+        //  dibujaHoja();
+        //  dibujaMeds();
+        //  dibujaJeringa();
+        if (shoot) {
+            dibujaBola();
+        }
+        dibujaJugador();
+        dibujaCronometro();
+        dibujaVidas();
+        dibujaPuntaje();
+    } else if (instrucciones) {
+        dibujaInstrucciones();
+    } else if (creditos) {
+        dibujaCreditos();
+    } else if (gameover) {
+        dibujaGameOver();
+    } else if (informacion1) {
+        dibujaInformacion1();
+    } else if (informacion2) {
+        dibujaInformacion2();
     }
-    dibujaJugador();
-    dibujaCronometro();
-    dibujaVidas();
-    dibujaPuntaje();
+    
     
 
     glutSwapBuffers();
@@ -689,6 +1006,44 @@ void myKeyboard(unsigned char theKey, int x, int y){
         case 'D':
             posX += 0.5;
             break;
+        case 'i':
+        case 'I':
+            inicio = false;
+            instrucciones = true;
+            jugando = false;
+            break;
+        case 'c':
+        case 'C':
+            creditos = true;
+            inicio = false;
+            jugando = false;
+            break;
+        case 'b':
+        case 'B':
+            inicio = true;
+            creditos = false;
+            jugando = false;
+            break;
+        case 'm':
+        case 'M':
+            if (gameover) {
+                gameover = false;
+                inicio = true;
+                jugando = false;
+            }
+            break;
+        case 'r':
+        case 'R':
+            if (gameover) {
+                gameover = false;
+                resetGame();
+            }
+            break;
+        case 'j':
+        case 'J':
+            instrucciones = false;
+            jugando = true;
+            break;
         case 27:
             exit(0);
             break;
@@ -707,10 +1062,17 @@ void mousePasivo(int x, int y){
 
 
 void mouseActivo(int button, int state, int x, int y){
-   
-    resetBallPosition();
-    shoot = true;
-    glutTimerFunc(800, timer, 1);
+    if (jugando) {
+        resetBallPosition();
+        shoot = true;
+        glutTimerFunc(800, timer, 1);
+    } else if (informacion1|| informacion2 || informacion3) {
+        informacion1 = false;
+        informacion2 = false;
+        informacion3 = false;
+        jugando = true;
+    }
+    
 }
 
 int main(int argc, char *argv[]) {

@@ -86,7 +86,13 @@
 		F471B42E1CBE038F004BED57 /* ball.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ball.obj; sourceTree = "<group>"; };
 		F471B42F1CBE038F004BED57 /* cross.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.mtl; sourceTree = "<group>"; };
 		F471B4301CBE038F004BED57 /* cross.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.obj; sourceTree = "<group>"; };
-		F4E824651CC758C8005DAA64 /* Inicio.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Inicio.bmp; sourceTree = "<group>"; };
+		F4BD9F2D1CD0805C00F7C689 /* creditos.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = creditos.bmp; sourceTree = "<group>"; };
+		F4BD9F2E1CD0832200F7C689 /* Gameover.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Gameover.bmp; sourceTree = "<group>"; };
+		F4BD9F2F1CD0832200F7C689 /* Informacion1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion1.bmp; sourceTree = "<group>"; };
+		F4BD9F301CD0832200F7C689 /* Informacion2.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion2.bmp; sourceTree = "<group>"; };
+		F4BD9F311CD0832200F7C689 /* Informacion3.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion3.bmp; sourceTree = "<group>"; };
+		F4BD9F341CD08CEA00F7C689 /* Inicio.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Inicio.bmp; sourceTree = "<group>"; };
+		F4BD9F351CD08CEA00F7C689 /* Instrucciones.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Instrucciones.bmp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,8 +201,14 @@
 			isa = PBXGroup;
 			children = (
 				2B34E7F11CBAB77100673258 /* pasto.bmp */,
+				F4BD9F341CD08CEA00F7C689 /* Inicio.bmp */,
+				F4BD9F351CD08CEA00F7C689 /* Instrucciones.bmp */,
+				F4BD9F2D1CD0805C00F7C689 /* creditos.bmp */,
+				F4BD9F2E1CD0832200F7C689 /* Gameover.bmp */,
+				F4BD9F2F1CD0832200F7C689 /* Informacion1.bmp */,
+				F4BD9F301CD0832200F7C689 /* Informacion2.bmp */,
+				F4BD9F311CD0832200F7C689 /* Informacion3.bmp */,
 				2BC043181CBA1ABC00280B20 /* diffuse.bmp */,
-				F4E824651CC758C8005DAA64 /* Inicio.bmp */,
 			);
 			path = Texturas;
 			sourceTree = "<group>";
