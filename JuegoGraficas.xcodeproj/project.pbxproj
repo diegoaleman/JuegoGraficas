@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B7DEA541CD087FE0092B49F /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */; };
+		2B7DEA551CD087FE0092B49F /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */; };
+		2B7DEA561CD087FE0092B49F /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA531CD087FE0092B49F /* SDL2.framework */; };
 		2BC042FA1CBA115100280B20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BC042F91CBA115100280B20 /* main.cpp */; };
 		2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043001CBA116A00280B20 /* GLUT.framework */; };
 		2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043011CBA116A00280B20 /* OpenGL.framework */; };
@@ -35,6 +38,13 @@
 
 /* Begin PBXFileReference section */
 		2B34E7F11CBAB77100673258 /* pasto.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pasto.bmp; sourceTree = "<group>"; };
+		2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		2B7DEA531CD087FE0092B49F /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		2B7DEA641CD094460092B49F /* gamewin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gamewin.wav; sourceTree = "<group>"; };
+		2B7DEA651CD094460092B49F /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
+		2B7DEA661CD094460092B49F /* colision_droga_jugador.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = colision_droga_jugador.wav; sourceTree = "<group>"; };
+		2B7DEA671CD094460092B49F /* colision_bala_droga.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = colision_bala_droga.wav; sourceTree = "<group>"; };
 		2BC042F61CBA115100280B20 /* JuegoGraficas */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = JuegoGraficas; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BC042F91CBA115100280B20 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2BC043001CBA116A00280B20 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -93,6 +103,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B7DEA541CD087FE0092B49F /* SDL2_mixer.framework in Frameworks */,
+				2B7DEA551CD087FE0092B49F /* SDL2_ttf.framework in Frameworks */,
+				2B7DEA561CD087FE0092B49F /* SDL2.framework in Frameworks */,
 				2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */,
 				2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */,
 			);
@@ -101,13 +114,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B7DEA5E1CD08CCB0092B49F /* Sonidos */ = {
+			isa = PBXGroup;
+			children = (
+				2B7DEA641CD094460092B49F /* gamewin.wav */,
+				2B7DEA651CD094460092B49F /* gameover.wav */,
+				2B7DEA661CD094460092B49F /* colision_droga_jugador.wav */,
+				2B7DEA671CD094460092B49F /* colision_bala_droga.wav */,
+			);
+			path = Sonidos;
+			sourceTree = "<group>";
+		};
 		2BC042ED1CBA115100280B20 = {
 			isa = PBXGroup;
 			children = (
+				2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */,
+				2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */,
+				2B7DEA531CD087FE0092B49F /* SDL2.framework */,
 				2BC043001CBA116A00280B20 /* GLUT.framework */,
 				2BC043011CBA116A00280B20 /* OpenGL.framework */,
-				2BC042F81CBA115100280B20 /* JuegoGraficas */,
 				2BC042F71CBA115100280B20 /* Products */,
+				2BC042F81CBA115100280B20 /* JuegoGraficas */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +149,7 @@
 		2BC042F81CBA115100280B20 /* JuegoGraficas */ = {
 			isa = PBXGroup;
 			children = (
+				2B7DEA5E1CD08CCB0092B49F /* Sonidos */,
 				2BC043171CBA1ABC00280B20 /* Texturas */,
 				2BC043041CBA12DB00280B20 /* ImageLoader.cpp */,
 				2BC043051CBA12DB00280B20 /* ImageLoader.h */,
@@ -371,6 +399,10 @@
 		2BC042FE1CBA115100280B20 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -378,6 +410,10 @@
 		2BC042FF1CBA115100280B20 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
