@@ -27,6 +27,9 @@
 #include "glm.h"
 #include "ImageLoader.h"
 
+#include "SDL2/SDL.h"
+#include "SDL2_mixer/SDL_mixer.h"
+
 using namespace std;
 
 int screenWidth = 800, screenHeight = 800;
@@ -59,6 +62,11 @@ string fullPath = __FILE__;
 
 int score;
 int vidas;
+
+Mix_Chunk *gamelose = NULL;
+Mix_Chunk *gamewin = NULL;
+Mix_Chunk *colision_bala_droga = NULL;
+Mix_Chunk *colision_droga_jugador = NULL;
 
 #define MODEL_COUNT 10
 #define PLAYER_MOD 0
@@ -370,6 +378,7 @@ bool revisaColisionDrogaJugador(double x1, double y1, double x2, double y2){
     if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55){
         vidas--;
         muestraInfo();
+        Mix_PlayChannel( 0, colision_droga_jugador, 0 );
         return true;
     }
     else{
@@ -527,32 +536,37 @@ bool revisaColisionBalaDrogas(double x, double y){
     if(fabs(x-xPilAmarilla) <= 0.55 && fabs(y-yPilAmarilla) <= 0.55){
         shoot = false;
         resetPilAmarilla();
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else if (fabs(x-xPilBlanca) <= 0.55 && fabs(y-yPilBlanca) <= 0.55){
         shoot = false;
         resetPilBlanca();
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else if (fabs(x-xPilRoja) <= 0.55 && fabs(y-yPilRoja) <= 0.55){
         shoot = false;
         resetPilRoja();
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else if (fabs(x-xHoja) <= 0.55 && fabs(y-yHoja) <= 0.55){
         shoot = false;
         resetHoja();
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else if (fabs(x-xMeds) <= 0.55 && fabs(y-yMeds) <= 0.55){
         shoot = false;
         resetMeds();
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else if (fabs(x-xJeringa) <= 0.55 && fabs(y-yJeringa) <= 0.55){
         shoot = false;
         resetJeringa();
-        
+        Mix_PlayChannel( 0, colision_bala_droga, 0 );
         return true;
     }
     else{
@@ -583,7 +597,8 @@ void dibujaEscenario(){
    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
-    
+    //glTranslated(0, 0, -4);
+    //glScaled(1.5, 1.5, 0);
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
     
@@ -709,6 +724,8 @@ void dibujaCreditos(){
 
 void dibujaGameOver(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    Mix_PlayChannel( 0, gamelose, 0 );
     
     char mensaje [200] = "";
     string s = to_string(score);
@@ -995,6 +1012,62 @@ void init(){
     models[BALL] = *glmReadOBJ(ruta.c_str());
     glmUnitize(&models[BALL]);
     glmVertexNormals(&models[BALL], 90.0, GL_TRUE);
+    
+    
+    
+    
+    
+    
+    //Initialize SDL
+    if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_AUDIO ) < 0 )
+    {
+        printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
+        //success = false;
+    }
+    
+    //Initialize SDL_mixer
+    if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
+    {
+        printf( "SDL_mixer could not initialize! SDL_mixer Error: %s\n", Mix_GetError() );
+        //success = false;
+    }
+
+    
+    
+    
+
+    
+    
+    //Load music
+    char rutamusica[200] = "";
+    
+    ruta = fullPath + "Sonidos/gameover.wav";
+    gamelose = Mix_LoadWAV(ruta.c_str());
+    if( gamelose == NULL ){
+        printf( "Failed to load gamefail sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+    
+    ruta = fullPath + "Sonidos/gamewin.wav";
+    gamewin = Mix_LoadWAV(ruta.c_str());
+    if( gamewin == NULL ){
+        printf( "Failed to load gamefail sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+    
+    ruta = fullPath + "Sonidos/colision_bala_droga.wav";
+    colision_bala_droga = Mix_LoadWAV(ruta.c_str());
+    if( colision_bala_droga == NULL ){
+        printf( "Failed to load gamefail sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+
+    
+    ruta = fullPath + "Sonidos/colision_droga_jugador.wav";
+    colision_droga_jugador = Mix_LoadWAV(ruta.c_str());
+    if( colision_droga_jugador == NULL ){
+        printf( "Failed to load gamefail sound effect! SDL_mixer Error: %s\n", Mix_GetError() );
+    }
+
+
+
     
 }
 
