@@ -166,7 +166,8 @@ void timer(int i) {
     
     cout << "Norm pos" <<endl;
     cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
-    if (!shoot) {
+    if (!shoot)
+    {
         distanceX = mouseX/80 - posX;
         distanceY = mouseY/80 - posY;
     }
@@ -174,18 +175,21 @@ void timer(int i) {
     
     double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
     double easingAmount = 0.1;
-    if (shoot) {
+    
+    if (shoot)
+    {
         ballY += distanceY * easingAmount;
         ballX += distanceX * easingAmount;
         
-        if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10) {
+        if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10)
+        {
             shoot = false;
         }
     }
     
 
     glutPostRedisplay();
-    glutTimerFunc(800,timer,1);
+    glutTimerFunc(1000,timer,1);
 }
 
 double getRandom(){
@@ -358,30 +362,39 @@ void dibujaPildoraRoja(){
 }
 
 void muestraInfo() {
-    if (vidas == 2) {
+    if (vidas == 2)
+    {
         informacion1 = true;
         jugando = false;
-        glutPostRedisplay();
-    } else if (vidas == 1) {
+       // glutPostRedisplay();
+    }
+    else
+        if (vidas == 1)
+        {
         informacion2 = true;
         jugando = false;
-        glutPostRedisplay();
-    } else if (vidas == 0) {
+      //  glutPostRedisplay();
+    }
+        else
+            if (vidas == 0)
+            {
         
         jugando = false;
         gameover = true;
-        glutPostRedisplay();
+      //  glutPostRedisplay();
     }
 }
 
 bool revisaColisionDrogaJugador(double x1, double y1, double x2, double y2){
-    if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55){
+    if(fabs(x1-x2) <= 0.55 && fabs(y1-y2) <= 0.55)
+    {
         vidas--;
         muestraInfo();
         Mix_PlayChannel( 0, colision_droga_jugador, 0 );
         return true;
     }
-    else{
+    else
+    {
         return false;
     }
 }
@@ -389,7 +402,8 @@ bool revisaColisionDrogaJugador(double x1, double y1, double x2, double y2){
 void dibujaPildoraAmarilla(){
     //glClear(GL_DEPTH_BUFFER_BIT);
     
-    if (revisaColisionDrogaJugador(xPilAmarilla, yPilAmarilla, posX, posY)){
+    if (revisaColisionDrogaJugador(xPilAmarilla, yPilAmarilla, posX, posY))
+    {
         resetPilAmarilla();
     }
     
@@ -597,7 +611,7 @@ void dibujaEscenario(){
    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
-    //glTranslated(0, 0, -4);
+    glTranslated(0, 0, -5);
     //glScaled(1.5, 1.5, 0);
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -608,16 +622,16 @@ void dibujaEscenario(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-20.0f, -20.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(20.0f, -20.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(20.0f, 20.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-20.0f, 20.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
@@ -629,7 +643,7 @@ void dibujaEscenario(){
 void dibujaPantallaInicio(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+   // glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -640,20 +654,20 @@ void dibujaPantallaInicio(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+   // glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -661,7 +675,7 @@ void dibujaPantallaInicio(){
 void dibujaInstrucciones(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+    //glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -672,20 +686,20 @@ void dibujaInstrucciones(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+  //  glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -693,7 +707,7 @@ void dibujaInstrucciones(){
 void dibujaCreditos(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+   // glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -704,20 +718,20 @@ void dibujaCreditos(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+  //  glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -737,7 +751,7 @@ void dibujaGameOver(){
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
     }
     
-    glPushMatrix();
+   // glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -748,20 +762,20 @@ void dibujaGameOver(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+  //  glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -769,7 +783,7 @@ void dibujaGameOver(){
 void dibujaInformacion1(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+  //  glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -780,20 +794,20 @@ void dibujaInformacion1(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+  //  glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -801,7 +815,7 @@ void dibujaInformacion1(){
 void dibujaInformacion2(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+  //  glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -812,20 +826,20 @@ void dibujaInformacion2(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
-    
-    glPopMatrix();
+  
+   // glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -833,7 +847,7 @@ void dibujaInformacion2(){
 void dibujaInformacion3(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glPushMatrix();
+  //  glPushMatrix();
     
     //Habilitar el uso de texturas
     glEnable(GL_TEXTURE_2D);
@@ -844,20 +858,20 @@ void dibujaInformacion3(){
     glBegin(GL_QUADS);
     //Asignar la coordenada de textura 0,0 al vertice
     glTexCoord2f(0.0f, 0.0f);
-    glVertex3f(-10.0f, -10.0f, 0);
+    glVertex3f(-13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,0 al vertice
     glTexCoord2f(1.0f, 0.0f);
-    glVertex3f(10.0f, -10.0f, 0);
+    glVertex3f(13.0f, -13.0f, 0);
     //Asignar la coordenada de textura 1,1 al vertice
     glTexCoord2f(1.0f,1.0f);
-    glVertex3f(10.0f, 10.0f, 0);
+    glVertex3f(13.0f, 13.0f, 0);
     //Asignar la coordenada de textura 0,1 al vertice
     glTexCoord2f(0.0f, 1.0f);
-    glVertex3f(-10.0f, 10.0f, 0);
+    glVertex3f(-13.0f, 13.0f, 0);
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    glPopMatrix();
+ //   glPopMatrix();
     //  glutPostRedisplay();
     
 }
@@ -866,46 +880,56 @@ void display(){
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    if (inicio) {
+    if (inicio)
+    {
         dibujaPantallaInicio();
-    } else if (jugando){
-        dibujaEscenario();
-        //  dibujaPildoraRoja();
-        if (vidas == 3) {
-            dibujaPildoraAmarilla();
-        }
-        if (vidas == 2) {
-            dibujaHoja();
-        }
-        if (vidas == 1) {
-            dibujaMeds();
-        }
-        //  dibujaPildoraBlanca();
-        //  dibujaArbol();
-        //  dibujaHoja();
-        //  dibujaMeds();
-        //  dibujaJeringa();
-        if (shoot) {
-            dibujaBola();
-        }
-        dibujaJugador();
-        dibujaCronometro();
-        dibujaVidas();
-        dibujaPuntaje();
-    } else if (instrucciones) {
-        dibujaInstrucciones();
-    } else if (creditos) {
-        dibujaCreditos();
-    } else if (gameover) {
-        dibujaGameOver();
-    } else if (informacion1) {
-        dibujaInformacion1();
-    } else if (informacion2) {
-        dibujaInformacion2();
     }
+    else
+        if (jugando)
+        {
+            dibujaEscenario();
+            //  dibujaPildoraRoja();
+            if (vidas == 3)
+            {
+                dibujaPildoraAmarilla();
+            }
+            else
+            if (vidas == 2)
+            {
+                dibujaHoja();
+            }
+            else
+            if (vidas == 1)
+            {
+                dibujaMeds();
+            }
+            //  dibujaPildoraBlanca();
+            //  dibujaArbol();
+            //  dibujaHoja();
+            //  dibujaMeds();
+            //  dibujaJeringa();
+            if (shoot)
+            {
+                dibujaBola();
+            }
+            dibujaJugador();
+            dibujaCronometro();
+            dibujaVidas();
+            dibujaPuntaje();
+        } else if (instrucciones) {
+            dibujaInstrucciones();
+        } else if (creditos) {
+            dibujaCreditos();
+        } else if (gameover) {
+            dibujaGameOver();
+        } else if (informacion1) {
+            dibujaInformacion1();
+        } else if (informacion2) {
+            dibujaInformacion2();
+        }
     
     
-
+    
     glutSwapBuffers();
 }
 
@@ -924,7 +948,8 @@ void reshape(int w, int h){
 
 
 void init(){
-    srand(time(0));
+    
+    srand(time(NULL));
     
     resetPilRoja();
     resetPilBlanca();
@@ -940,7 +965,7 @@ void init(){
     
     //General settings
     glClearColor(0,0,0, 1.0);
-    glEnable(GL_DEPTH_TEST);
+    //glEnable(GL_DEPTH_TEST);
     glShadeModel(GL_SMOOTH);
     
     //player
