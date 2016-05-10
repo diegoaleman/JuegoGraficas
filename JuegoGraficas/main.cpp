@@ -162,24 +162,21 @@ void timer(int i) {
     //}
     
     delta = 0.1;
-    t += delta;
+    //t += delta;
     
-    cout << "Norm pos" <<endl;
-    cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
     if (!shoot)
     {
         distanceX = mouseX/80 - posX;
         distanceY = mouseY/80 - posY;
     }
     
-    
-    double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
     double easingAmount = 0.1;
     
     if (shoot)
     {
         ballY += distanceY * easingAmount;
         ballX += distanceX * easingAmount;
+        cout << ballX << " --- " << ballY << endl;
         
         if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10)
         {
@@ -374,7 +371,7 @@ void muestraInfo() {
         informacion2 = true;
         jugando = false;
       //  glutPostRedisplay();
-    }
+        }
         else
             if (vidas == 0)
             {
@@ -410,7 +407,7 @@ void dibujaPildoraAmarilla(){
     float distX = posX - xPilAmarilla;
     float distY = posY - yPilAmarilla;
     
-    deltaPilAmarilla += 0.001;
+    deltaPilAmarilla = 0.05;
     
     xPilAmarilla += distX * deltaPilAmarilla;
     yPilAmarilla += distY * deltaPilAmarilla;
@@ -1173,7 +1170,7 @@ void mouseActivo(int button, int state, int x, int y){
     if (jugando) {
         resetBallPosition();
         shoot = true;
-        glutTimerFunc(800, timer, 1);
+        glutTimerFunc(1000, timer, 1);
     } else if (informacion1|| informacion2 || informacion3) {
         informacion1 = false;
         informacion2 = false;
@@ -1197,7 +1194,7 @@ int main(int argc, char *argv[]) {
     glutKeyboardFunc(myKeyboard);
     glutPassiveMotionFunc(mousePasivo);
     glutMouseFunc(mouseActivo);
-    glutTimerFunc(800, timer, 1);
+    glutTimerFunc(1000, timer, 1);
     glutMainLoop();
     return EXIT_SUCCESS;
 }

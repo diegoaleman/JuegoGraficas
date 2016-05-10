@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B7DEA541CD087FE0092B49F /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */; };
-		2B7DEA551CD087FE0092B49F /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */; };
-		2B7DEA561CD087FE0092B49F /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B7DEA531CD087FE0092B49F /* SDL2.framework */; };
 		2BC042FA1CBA115100280B20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2BC042F91CBA115100280B20 /* main.cpp */; };
 		2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043001CBA116A00280B20 /* GLUT.framework */; };
 		2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BC043011CBA116A00280B20 /* OpenGL.framework */; };
@@ -22,6 +19,9 @@
 		2BD93F3E1CBABEB2004CB4D8 /* glmimg_sdl.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F351CBABEB2004CB4D8 /* glmimg_sdl.c */; };
 		2BD93F3F1CBABEB2004CB4D8 /* glmimg_sim.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F361CBABEB2004CB4D8 /* glmimg_sim.c */; };
 		2BD93F401CBABEB2004CB4D8 /* glmimg.c in Sources */ = {isa = PBXBuildFile; fileRef = 2BD93F371CBABEB2004CB4D8 /* glmimg.c */; };
+		F4AA68881CE21D42008AFF31 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AA68871CE21D42008AFF31 /* SDL2_mixer.framework */; };
+		F4AA688A1CE21E23008AFF31 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AA68891CE21E23008AFF31 /* SDL2_ttf.framework */; };
+		F4AA688C1CE21EB4008AFF31 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4AA688B1CE21EB4008AFF31 /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,9 +38,6 @@
 
 /* Begin PBXFileReference section */
 		2B34E7F11CBAB77100673258 /* pasto.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pasto.bmp; sourceTree = "<group>"; };
-		2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
-		2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
-		2B7DEA531CD087FE0092B49F /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		2B7DEA641CD094460092B49F /* gamewin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gamewin.wav; sourceTree = "<group>"; };
 		2B7DEA651CD094460092B49F /* gameover.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = gameover.wav; sourceTree = "<group>"; };
 		2B7DEA661CD094460092B49F /* colision_droga_jugador.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = colision_droga_jugador.wav; sourceTree = "<group>"; };
@@ -96,6 +93,9 @@
 		F471B42E1CBE038F004BED57 /* ball.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = ball.obj; sourceTree = "<group>"; };
 		F471B42F1CBE038F004BED57 /* cross.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.mtl; sourceTree = "<group>"; };
 		F471B4301CBE038F004BED57 /* cross.obj */ = {isa = PBXFileReference; lastKnownFileType = text; path = cross.obj; sourceTree = "<group>"; };
+		F4AA68871CE21D42008AFF31 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
+		F4AA68891CE21E23008AFF31 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
+		F4AA688B1CE21EB4008AFF31 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 		F4BD9F2D1CD0805C00F7C689 /* creditos.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = creditos.bmp; sourceTree = "<group>"; };
 		F4BD9F2E1CD0832200F7C689 /* Gameover.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Gameover.bmp; sourceTree = "<group>"; };
 		F4BD9F2F1CD0832200F7C689 /* Informacion1.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion1.bmp; sourceTree = "<group>"; };
@@ -110,9 +110,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B7DEA541CD087FE0092B49F /* SDL2_mixer.framework in Frameworks */,
-				2B7DEA551CD087FE0092B49F /* SDL2_ttf.framework in Frameworks */,
-				2B7DEA561CD087FE0092B49F /* SDL2.framework in Frameworks */,
+				F4AA688C1CE21EB4008AFF31 /* SDL2.framework in Frameworks */,
+				F4AA688A1CE21E23008AFF31 /* SDL2_ttf.framework in Frameworks */,
+				F4AA68881CE21D42008AFF31 /* SDL2_mixer.framework in Frameworks */,
 				2BC043021CBA116A00280B20 /* GLUT.framework in Frameworks */,
 				2BC043031CBA116A00280B20 /* OpenGL.framework in Frameworks */,
 			);
@@ -135,9 +135,9 @@
 		2BC042ED1CBA115100280B20 = {
 			isa = PBXGroup;
 			children = (
-				2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */,
-				2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */,
-				2B7DEA531CD087FE0092B49F /* SDL2.framework */,
+				F4AA688B1CE21EB4008AFF31 /* SDL2.framework */,
+				F4AA68891CE21E23008AFF31 /* SDL2_ttf.framework */,
+				F4AA68871CE21D42008AFF31 /* SDL2_mixer.framework */,
 				2BC043001CBA116A00280B20 /* GLUT.framework */,
 				2BC043011CBA116A00280B20 /* OpenGL.framework */,
 				2BC042F71CBA115100280B20 /* Products */,
