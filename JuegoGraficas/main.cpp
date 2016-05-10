@@ -39,8 +39,10 @@ double rotado = 0;
 double mouseX, mouseY;
 double ballX = 0, ballY = 0;
 bool shoot = false, op1 = false, op2 = false, op3 = false, op4 = false;
-bool inicio = true, instrucciones = false, creditos = false, gameover = false, informacion1 = false, informacion2 = false, informacion3 = false, jugando = false;
+bool inicio = true, instrucciones = false, creditos = false, gameover = false;
+bool informacion1 = false, informacion2 = false, informacion3 = false, informacion4 = false, informacion5 = false, informacion6 = false, jugando = false;
 double mouseNormPosX = 0, mouseNormPosY = 0, distanceX = 0, distanceY = 0;
+double timerFinal = 0;
 
 
 // Posiciones de drogas
@@ -153,6 +155,15 @@ void initRendering(){
     sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion3.bmp");
     image = loadBMP(ruta);loadTexture(image,i++);
     
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion4.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion5.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
+    sprintf(ruta,"%s%s", fullPath.c_str() , "Texturas/Informacion6.bmp");
+    image = loadBMP(ruta);loadTexture(image,i++);
+    
     delete image;
 }
 
@@ -245,12 +256,15 @@ void resetGame() {
     posX = 0;
     posY = 0;
     jugando = true;
-    vidas = 3;
+    vidas = 6;
     sumaTotal = 0;
     score = 0;
     inicio = false;
     instrucciones = false;
     creditos = false;
+    informacion6 = false;
+    informacion5 = false;
+    informacion4 = false;
     informacion3 = false;
     informacion2 = false;
     informacion1 = false;
@@ -283,7 +297,7 @@ void dibujaCronometro(){
     }
     
     
-    glColor3f(0, 0 , 0);
+    glColor3f(255, 255 , 255);
     glRasterPos2f(-1, 10); // inicializa raster position
     for (k=0; mensaje[k] != '\0'; k++) {
         glColor3f(1, 1, 1);
@@ -295,7 +309,17 @@ void dibujaCronometro(){
 void dibujaVidas(){
     char mensaje [200] = "";
     
-    if (vidas == 3){
+    
+    if (vidas == 6){
+        sprintf(mensaje, "%s", "O O O O O O");
+    }
+    else if (vidas == 5){
+        sprintf(mensaje, "%s", "O O O O O");
+    }
+    else if (vidas == 4){
+        sprintf(mensaje, "%s", "O O O O");
+    }
+    else if (vidas == 3){
         sprintf(mensaje, "%s", "O O O");
     }
     else if(vidas == 2){
@@ -307,10 +331,10 @@ void dibujaVidas(){
     else {
         sprintf(mensaje, "%s", "");
     }
-    glColor3f(0, 0 , 0);
+    glColor3f(255, 255 , 255);
     glRasterPos2f(-8, 10); // inicializa raster position
     for (int k=0; mensaje[k] != '\0'; k++) {
-        glColor3f(1, 1, 1);
+        glColor3f(255, 255, 255);
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
     }
 }
@@ -319,10 +343,10 @@ void dibujaPuntaje(){
     char mensaje [200] = "";
     string s = to_string(score);
     sprintf(mensaje, "%s", s.c_str());
-    glColor3f(0, 0 , 0);
+    glColor3f(255, 255 , 255);
     glRasterPos2f(8, 10); // inicializa raster position
     for (int k=0; mensaje[k] != '\0'; k++) {
-        glColor3f(1, 1, 1);
+        glColor3f(255, 255, 255);
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
     }
 }
@@ -343,45 +367,41 @@ void dibujaJugador(){
 
 }
 
-void dibujaPildoraRoja(){
-    
-    //glClear(GL_DEPTH_BUFFER_BIT);
-    
-    float distX = posX - xPilRoja;
-    float distY = posY - yPilRoja;
-    
-    xPilRoja += distX * 0.05;
-    yPilRoja += distY * 0.05;
-    
-    glPushMatrix();
-    glTranslated(xPilRoja, yPilRoja, 0);
-    glRotated(90, 0, 0, 0);
-    glScaled(0.5, 0.5, 0.5);
-    glmDraw(&models[PILL_ONE], GLM_COLOR | GLM_FLAT);
-    glPopMatrix();
-}
+
 
 void muestraInfo() {
-    if (vidas == 2)
+    
+    if (vidas == 5)
     {
-        informacion1 = true;
+        informacion5 = true;
         jugando = false;
-       // glutPostRedisplay();
     }
-    else
-        if (vidas == 1)
-        {
+    else if (vidas == 4)
+    {
+        informacion4 = true;
+        jugando = false;
+    }
+    else if (vidas == 3)
+    {
+        informacion3 = true;
+        jugando = false;
+    }
+    else if (vidas == 2)
+    {
         informacion2 = true;
         jugando = false;
-      //  glutPostRedisplay();
     }
-        else
-            if (vidas == 0)
-            {
-        
+    else if (vidas == 1)
+        {
+        informacion1 = true;
+        jugando = false;
+    }
+    else if (vidas == 0){
         jugando = false;
         gameover = true;
-      //  glutPostRedisplay();
+        timerFinal = sumaTotal;
+        
+        
     }
 }
 
@@ -421,6 +441,29 @@ void dibujaPildoraAmarilla(){
     glRotated(90, 0, 0, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[PILL_TWO], GLM_COLOR | GLM_FLAT);
+    glPopMatrix();
+}
+
+
+void dibujaPildoraRoja(){
+    
+    //glClear(GL_DEPTH_BUFFER_BIT);
+    
+    if (revisaColisionDrogaJugador(xPilRoja, yPilRoja, posX, posY)){
+        resetPilRoja();
+    }
+    
+    float distX = posX - xPilRoja;
+    float distY = posY - yPilRoja;
+    
+    xPilRoja += distX * 0.05;
+    yPilRoja += distY * 0.05;
+    
+    glPushMatrix();
+    glTranslated(xPilRoja, yPilRoja, 0);
+    glRotated(90, 0, 0, 0);
+    glScaled(0.5, 0.5, 0.5);
+    glmDraw(&models[PILL_ONE], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
 }
 
@@ -741,15 +784,6 @@ void dibujaGameOver(){
     
     Mix_PlayChannel( 0, gamelose, 0 );
     
-    char mensaje [200] = "";
-    string s = to_string(score);
-    sprintf(mensaje, "%s", s.c_str());
-    glColor3f(0, 0 , 0);
-    glRasterPos2f(8, 10); // inicializa raster position
-    for (int k=0; mensaje[k] != '\0'; k++) {
-        glColor3f(1, 1, 1);
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
-    }
     
    // glPushMatrix();
     
@@ -775,8 +809,53 @@ void dibujaGameOver(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-  //  glPopMatrix();
-    //  glutPostRedisplay();
+    
+    
+    
+    
+    
+    char mensaje [200] = "";
+    string s = to_string(score);
+    sprintf(mensaje, "%s", s.c_str());
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(3, 2.5); // inicializa raster position
+    for (int k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+    
+    
+    GLint k;
+    
+    int a,b,c;
+    
+    float x = sumaTotal / 10.0;
+    b = x;
+    
+    x = x - b;
+    
+    x = x * 10;
+    c=x;
+    
+    a = b /60;
+    b = b %60;
+    
+    
+    
+    if (b <= 9) {
+        sprintf(mensaje, "%d : 0%d : %d", a, b , c);
+    } else {
+        sprintf(mensaje, "%d : %d : %d", a, b , c);
+    }
+    
+    
+    glColor3f(0, 0 , 0);
+    glRasterPos2f(3, -1.5); // inicializa raster position
+    for (k=0; mensaje[k] != '\0'; k++) {
+        glColor3f(1, 1, 1);
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, mensaje[k]);
+    }
+
     
 }
 
@@ -876,6 +955,103 @@ void dibujaInformacion3(){
     
 }
 
+void dibujaInformacion4(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //  glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[8]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(13.0f, 13.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-13.0f, 13.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    //   glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+
+void dibujaInformacion5(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //  glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[9]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(13.0f, 13.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-13.0f, 13.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    //   glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
+void dibujaInformacion6(){
+    // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    
+    //  glPushMatrix();
+    
+    //Habilitar el uso de texturas
+    glEnable(GL_TEXTURE_2D);
+    
+    //Elegir la textura del Quads: angulo cambia con el timer
+    glBindTexture(GL_TEXTURE_2D, texName[10]);
+    
+    glBegin(GL_QUADS);
+    //Asignar la coordenada de textura 0,0 al vertice
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(-13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,0 al vertice
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(13.0f, -13.0f, 0);
+    //Asignar la coordenada de textura 1,1 al vertice
+    glTexCoord2f(1.0f,1.0f);
+    glVertex3f(13.0f, 13.0f, 0);
+    //Asignar la coordenada de textura 0,1 al vertice
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(-13.0f, 13.0f, 0);
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+    
+    //   glPopMatrix();
+    //  glutPostRedisplay();
+    
+}
+
 void display(){
     glClearColor(1.0,1.0,1.0,1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -909,25 +1085,36 @@ void display(){
             
             dibujaEscenario();
             //  dibujaPildoraRoja();
-            if (vidas == 3)
+            if (vidas == 6)
+            {
+                dibujaJeringa();
+            }
+            else if (vidas == 5)
+            {
+                dibujaPildoraBlanca();
+            }
+            else if (vidas == 4)
+            {
+                dibujaPildoraRoja();
+            }
+            else if (vidas == 3)
             {
                 dibujaPildoraAmarilla();
             }
-            else
-            if (vidas == 2)
+            else if (vidas == 2)
             {
                 dibujaHoja();
             }
-            else
-            if (vidas == 1)
+            else if (vidas == 1)
             {
                 dibujaMeds();
             }
-            //  dibujaPildoraBlanca();
-            //  dibujaArbol();
-            //  dibujaHoja();
-            //  dibujaMeds();
-            //  dibujaJeringa();
+
+            
+            
+            
+            
+            
             if (shoot)
             {
                 dibujaBola();
@@ -963,6 +1150,31 @@ void display(){
             glDisable(GL_DEPTH_TEST);
             dibujaInformacion2();
         }
+        else if (informacion3) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
+            dibujaInformacion3();
+        }
+        else if (informacion4) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
+            dibujaInformacion4();
+        }
+        else if (informacion5) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
+            dibujaInformacion5();
+        }
+        else if (informacion6) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
+            dibujaInformacion6();
+        }
+    
     
     
     
@@ -999,7 +1211,7 @@ void init(){
     
     deltaPilAmarilla = 0.001;
     score = 0;
-    vidas = 3;
+    vidas = 6;
     
     
     //General settings
@@ -1227,10 +1439,13 @@ void mouseActivo(int button, int state, int x, int y){
         resetBallPosition();
         shoot = true;
         glutTimerFunc(800, timer, 1);
-    } else if (informacion1|| informacion2 || informacion3) {
+    } else if (informacion1|| informacion2 || informacion3 || informacion4 || informacion5 || informacion6) {
         informacion1 = false;
         informacion2 = false;
         informacion3 = false;
+        informacion4 = false;
+        informacion5 = false;
+        informacion6 = false;
         jugando = true;
     }
     
