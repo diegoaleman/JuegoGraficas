@@ -38,6 +38,9 @@
 
 /* Begin PBXFileReference section */
 		2B34E7F11CBAB77100673258 /* pasto.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = pasto.bmp; sourceTree = "<group>"; };
+		2B4CEFF01CE21E090070B8CD /* Informacion6.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion6.bmp; sourceTree = "<group>"; };
+		2B4CEFF11CE21E090070B8CD /* Informacion5.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion5.bmp; sourceTree = "<group>"; };
+		2B4CEFF21CE21E090070B8CD /* Informacion4.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = Informacion4.bmp; sourceTree = "<group>"; };
 		2B7DEA511CD087FE0092B49F /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		2B7DEA521CD087FE0092B49F /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		2B7DEA531CD087FE0092B49F /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
@@ -232,10 +235,13 @@
 				F4BD9F341CD08CEA00F7C689 /* Inicio.bmp */,
 				F4BD9F351CD08CEA00F7C689 /* Instrucciones.bmp */,
 				F4BD9F2D1CD0805C00F7C689 /* creditos.bmp */,
+				F4BD9F301CD0832200F7C689 /* Informacion2.bmp */,
 				F4BD9F2E1CD0832200F7C689 /* Gameover.bmp */,
 				F4BD9F2F1CD0832200F7C689 /* Informacion1.bmp */,
-				F4BD9F301CD0832200F7C689 /* Informacion2.bmp */,
 				F4BD9F311CD0832200F7C689 /* Informacion3.bmp */,
+				2B4CEFF01CE21E090070B8CD /* Informacion6.bmp */,
+				2B4CEFF11CE21E090070B8CD /* Informacion5.bmp */,
+				2B4CEFF21CE21E090070B8CD /* Informacion4.bmp */,
 				2BC043181CBA1ABC00280B20 /* diffuse.bmp */,
 			);
 			path = Texturas;

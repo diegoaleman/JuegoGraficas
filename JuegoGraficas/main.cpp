@@ -157,9 +157,9 @@ void initRendering(){
 }
 
 void timer(int i) {
-    //if ( start){
+    if ( jugando){
         sumaTotal += 1;
-    //}
+    }
     
     delta = 0.1;
     t += delta;
@@ -887,6 +887,26 @@ void display(){
     else
         if (jugando)
         {
+            
+            
+            GLfloat light_ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+            GLfloat light_diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+            GLfloat light_specular[] = { 1.0, 1.0, 1.0, 1.0 };
+            /*  light_position is NOT default value */
+            GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
+            
+            glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
+            glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
+            glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
+            glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+            
+            glEnable(GL_LIGHTING);
+            glEnable(GL_LIGHT0);
+            glEnable(GL_DEPTH_TEST);
+            glShadeModel (GL_FLAT);//   GL_SMOOTH
+            
+            
+            
             dibujaEscenario();
             //  dibujaPildoraRoja();
             if (vidas == 3)
@@ -917,14 +937,30 @@ void display(){
             dibujaVidas();
             dibujaPuntaje();
         } else if (instrucciones) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
+
             dibujaInstrucciones();
         } else if (creditos) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
             dibujaCreditos();
         } else if (gameover) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
             dibujaGameOver();
         } else if (informacion1) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
             dibujaInformacion1();
         } else if (informacion2) {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_DEPTH_TEST);
             dibujaInformacion2();
         }
     
@@ -946,9 +982,12 @@ void reshape(int w, int h){
 }
 
 
-
+/****************************************************************
+ *
+ *  Funcion que carga todo lo necesario para correr el juego
+ *
+ ****************************************************************/
 void init(){
-    
     srand(time(NULL));
     
     resetPilRoja();
@@ -1060,9 +1099,6 @@ void init(){
     
     
     
-
-    
-    
     //Load music
     char rutamusica[200] = "";
     
@@ -1096,6 +1132,14 @@ void init(){
     
 }
 
+
+
+
+/****************************************************************
+ *
+ *  Funcion para hacer una accion al click de una letra
+ *
+ ****************************************************************/
 void myKeyboard(unsigned char theKey, int x, int y){
     switch (theKey){
         case 'w':
@@ -1158,6 +1202,16 @@ void myKeyboard(unsigned char theKey, int x, int y){
     }
     
 }
+
+
+
+
+/****************************************************************
+ *
+ *  Funciones de mouse para saber su posicion ante una accion
+ *  (un click) o cuando se mueve
+ *
+ ****************************************************************/
 void mousePasivo(int x, int y){
     mouseX = (x - 400) * 2;
     mouseY = ((y - 400) * 2) * -1;
@@ -1167,7 +1221,6 @@ void mousePasivo(int x, int y){
     cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
     
 }
-
 
 void mouseActivo(int button, int state, int x, int y){
     if (jugando) {
@@ -1183,6 +1236,14 @@ void mouseActivo(int button, int state, int x, int y){
     
 }
 
+
+
+
+/****************************************************************
+ *
+ *  Funcion main
+ *
+ ****************************************************************/
 int main(int argc, char *argv[]) {
     getParentPath();    //Find root path for files
     glutInit(&argc,argv);
