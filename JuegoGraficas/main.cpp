@@ -560,7 +560,7 @@ void dibujaMeds() {
     
     glPushMatrix();
     glTranslated(xMeds, yMeds, 0);
-    glRotated(90, 0, 0, 0);
+    glRotated(45, 1, 1, 0);
     glScaled(0.5, 0.5, 0.5);
     glmDraw(&models[MEDS], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
@@ -809,7 +809,7 @@ void dibujaGameOver(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    
+    //resetGame();
     
     
     
@@ -1407,6 +1407,7 @@ void myKeyboard(unsigned char theKey, int x, int y){
         case 'J':
             instrucciones = false;
             jugando = true;
+            resetGame();
             break;
         case 27:
             exit(0);
@@ -1425,8 +1426,8 @@ void myKeyboard(unsigned char theKey, int x, int y){
  *
  ****************************************************************/
 void mousePasivo(int x, int y){
-    mouseX = (x - 400) * 2;
-    mouseY = ((y - 400) * 2) * -1;
+    mouseX = (x - (screenWidth/2)) * 2;
+    mouseY = ((y - (screenHeight/2)) * 2) * -1;
     rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
     
     //cout << rotado <<endl;
