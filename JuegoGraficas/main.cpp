@@ -55,8 +55,6 @@ double xJeringa, yJeringa;
 
 double deltaPilAmarilla;
 
-float delta=0.1;
-float t=-1.0;
 
 int sumaTotal = 0;
 
@@ -172,9 +170,6 @@ void timer(int i) {
         sumaTotal += 1;
     }
     
-    delta = 0.1;
-    t += delta;
-    
     cout << "Norm pos" <<endl;
     cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
     if (!shoot)
@@ -187,13 +182,11 @@ void timer(int i) {
     double distance = sqrt(distanceX*distanceX + distanceY*distanceY);
     double easingAmount = 0.1;
     
-    if (shoot)
-    {
+    if (shoot){
         ballY += distanceY * easingAmount;
         ballX += distanceX * easingAmount;
         
-        if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10)
-        {
+        if (ballY >= 10 || ballX >=10 || ballY <= -10 || ballX <= -10){
             shoot = false;
         }
     }
@@ -679,8 +672,6 @@ void dibujaEscenario(){
     glDisable(GL_TEXTURE_2D);
     
     glPopMatrix();
-  //  glutPostRedisplay();
-
 }
 
 void dibujaPantallaInicio(){
@@ -710,8 +701,6 @@ void dibujaPantallaInicio(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-   // glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -742,8 +731,7 @@ void dibujaInstrucciones(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-  //  glPopMatrix();
-    //  glutPostRedisplay();
+
     
 }
 
@@ -774,8 +762,6 @@ void dibujaCreditos(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-  //  glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -886,8 +872,6 @@ void dibujaInformacion1(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-  //  glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -918,8 +902,6 @@ void dibujaInformacion2(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
   
-   // glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -950,8 +932,7 @@ void dibujaInformacion3(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
- //   glPopMatrix();
-    //  glutPostRedisplay();
+
     
 }
 
@@ -982,8 +963,6 @@ void dibujaInformacion4(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    //   glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -1015,8 +994,6 @@ void dibujaInformacion5(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    //   glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -1047,8 +1024,6 @@ void dibujaInformacion6(){
     glEnd();
     glDisable(GL_TEXTURE_2D);
     
-    //   glPopMatrix();
-    //  glutPostRedisplay();
     
 }
 
@@ -1439,7 +1414,7 @@ void mouseActivo(int button, int state, int x, int y){
     if (jugando) {
         resetBallPosition();
         shoot = true;
-        glutTimerFunc(800, timer, 1);
+        glutTimerFunc(1000, timer, 1);
     } else if (informacion1|| informacion2 || informacion3 || informacion4 || informacion5 || informacion6) {
         informacion1 = false;
         informacion2 = false;
@@ -1474,7 +1449,7 @@ int main(int argc, char *argv[]) {
     glutKeyboardFunc(myKeyboard);
     glutPassiveMotionFunc(mousePasivo);
     glutMouseFunc(mouseActivo);
-    glutTimerFunc(800, timer, 1);
+    glutTimerFunc(1000, timer, 1);
     glutMainLoop();
     return EXIT_SUCCESS;
 }
