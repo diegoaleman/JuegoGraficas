@@ -170,8 +170,8 @@ void timer(int i) {
         sumaTotal += 1;
     }
     
-    cout << "Norm pos" <<endl;
-    cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
+//    cout << "Norm pos" <<endl;
+//    cout << "mousex: " << mouseX/80 << " mousey: " << mouseY/80 <<endl;
     if (!shoot)
     {
         distanceX = mouseX/80 - posX;
@@ -356,7 +356,7 @@ void dibujaJugador(){
     glmDraw(&models[PLAYER_MOD], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
     
-    cout << posX << "-" << posY << endl;
+    //cout << posX << "-" << posY << endl;
 
 }
 
@@ -492,26 +492,26 @@ void dibujaArbol(){
     glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
     glPopMatrix();
     
-    glPushMatrix();
-    glTranslated(8, -8, 0);
-    glRotated(90, 0, 0, 0);
-    glScaled(2.5, 2.5, 2.5);
-    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslated(8, 8, 0);
-    glRotated(90, 0, 0, 0);
-    glScaled(2.5, 2.5, 2.5);
-    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslated(-8, 8, 0);
-    glRotated(90, 0, 0, 0);
-    glScaled(2.5, 2.5, 2.5);
-    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
-    glPopMatrix();
+//    glPushMatrix();
+//    glTranslated(8, -8, 0);
+//    glRotated(90, 0, 0, 0);
+//    glScaled(2.5, 2.5, 2.5);
+//    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+//    glPopMatrix();
+//    
+//    glPushMatrix();
+//    glTranslated(8, 8, 0);
+//    glRotated(90, 0, 0, 0);
+//    glScaled(2.5, 2.5, 2.5);
+//    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+//    glPopMatrix();
+//
+//    glPushMatrix();
+//    glTranslated(-8, 8, 0);
+//    glRotated(90, 0, 0, 0);
+//    glScaled(2.5, 2.5, 2.5);
+//    glmDraw(&models[TREE], GLM_COLOR | GLM_FLAT);
+//    glPopMatrix();
 }
 
 void dibujaHoja(){
@@ -1094,6 +1094,7 @@ void display(){
             {
                 dibujaBola();
             }
+            dibujaArbol();
             dibujaJugador();
             dibujaCronometro();
             dibujaVidas();
@@ -1406,7 +1407,7 @@ void mousePasivo(int x, int y){
     rotado = (atan2(mouseY,mouseX) * 180 / 3.141)+180;
     
     //cout << rotado <<endl;
-    cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
+    //cout << "posicion x: " << mouseX <<" posicion y: "<< mouseY << endl;
     
 }
 
@@ -1423,6 +1424,67 @@ void mouseActivo(int button, int state, int x, int y){
         informacion5 = false;
         informacion6 = false;
         jugando = true;
+    }
+    if (creditos) {
+        if (x >= screenWidth/2 && x <= screenWidth) {
+            if (y >= screenHeight/2 + (screenHeight/8)*2 && y <= screenHeight/2 + (screenHeight/8)*3) {
+                
+                creditos = false;
+                jugando = false;
+                inicio = true;
+            }
+        }
+    }
+    
+    else if (instrucciones) {
+        if (x >= screenWidth/2 && x <= screenWidth) {
+            if (y >= screenHeight/2 + (screenHeight/8)*2 && y <= screenHeight/2 + (screenHeight/8)*3) {
+                instrucciones = false;
+                jugando = true;
+                resetGame();
+            }
+        }
+    }
+    else if (inicio) {
+        cout << "x: " << x << " y: " << y << endl;
+        if (x >= 0 && x <= screenWidth) {
+            if (y >= screenHeight/2 && y <= screenHeight/2 + (screenHeight/8)) {
+                cout << "iniciar" << endl;
+                //                cout << "equis: " << x << " ye: " << y << endl;
+                inicio = false;
+                instrucciones = true;
+                jugando = false;
+            }
+            else if (y >= screenHeight/2 + (screenHeight/8) && y <= screenHeight/2 + (screenHeight/8)*2) {
+                cout << "creditos" << endl;
+                //                cout << "equis: " << x << " ye: " << y << endl;
+                creditos = true;
+                inicio = false;
+                jugando = false;
+            }
+            else if (y >= screenHeight/2 + (screenHeight/8)*2 && y <= screenHeight/2 + (screenHeight/8)*3) {
+                //                cout << "salir" << endl;
+                //                cout << "equis: " << x << " ye: " << y << endl;
+                exit(0);
+            }
+        }
+    }
+    else if (gameover) {
+        if (x >= screenWidth/2 && x <= screenWidth) {
+            if (y >= screenHeight/2 + (screenHeight/8)*2 && y <= screenHeight/2 + (screenHeight/8)*3) {
+                // menu
+                gameover = false;
+                inicio = true;
+                jugando = false;
+            }
+        }
+        else {
+            if (y >= screenHeight/2 + (screenHeight/8)*2 && y <= screenHeight/2 + (screenHeight/8)*3) {
+                // restart
+                gameover = false;
+                resetGame();
+            }
+        }
     }
     
 }
