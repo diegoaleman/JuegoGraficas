@@ -55,7 +55,7 @@ double xJeringa, yJeringa;
 
 double deltaPilAmarilla;
 
-
+bool playGameOver = false;
 int sumaTotal = 0;
 
 string fullPath = __FILE__;
@@ -304,22 +304,22 @@ void dibujaVidas(){
     
     
     if (vidas == 6){
-        sprintf(mensaje, "%s", "O O O O O O");
+        sprintf(mensaje, "%s", "Vidas: 6");
     }
     else if (vidas == 5){
-        sprintf(mensaje, "%s", "O O O O O");
+        sprintf(mensaje, "%s", "Vidas: 5");
     }
     else if (vidas == 4){
-        sprintf(mensaje, "%s", "O O O O");
+        sprintf(mensaje, "%s", "Vidas: 4");
     }
     else if (vidas == 3){
-        sprintf(mensaje, "%s", "O O O");
+        sprintf(mensaje, "%s", "Vidas: 3");
     }
     else if(vidas == 2){
-        sprintf(mensaje, "%s", "O O");
+        sprintf(mensaje, "%s", "Vidas: 2");
     }
     else if (vidas == 1){
-        sprintf(mensaje, "%s", "O");
+        sprintf(mensaje, "%s", "Vidas: 1");
     }
     else {
         sprintf(mensaje, "%s", "");
@@ -393,6 +393,8 @@ void muestraInfo() {
         jugando = false;
         gameover = true;
         timerFinal = sumaTotal;
+        playGameOver = true;
+        
         
         
     }
@@ -768,7 +770,7 @@ void dibujaCreditos(){
 void dibujaGameOver(){
     // glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    Mix_PlayChannel( 0, gamelose, 0 );
+    
     
     
    // glPushMatrix();
@@ -1115,6 +1117,11 @@ void display(){
             glDisable(GL_LIGHT0);
             glDisable(GL_DEPTH_TEST);
             dibujaGameOver();
+            if (playGameOver){
+                Mix_PlayChannel( 0, gamelose, 0 );
+                playGameOver = false;
+            }
+            
         } else if (informacion1) {
             glDisable(GL_LIGHTING);
             glDisable(GL_LIGHT0);
